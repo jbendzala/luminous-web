@@ -1,0 +1,872 @@
+<title>Luminous — Prémiový úklidový servis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prémiový úklidový servis v Praze a Bratislavě. Profesionální tým, pevné ceny, garance spokojenosti.">
+
+<style>
+:root {
+  --deep:     #130904;
+  --rich:     #1c0e07;
+  --warm:     #271408;
+  --card:     #2e190c;
+  --gold:     #c9a44a;
+  --gold-lt:  #e8d09a;
+  --gold-dk:  #886614;
+  --gold-dim: rgba(201,164,74,.13);
+  --ivory:    #efe4cc;
+  --muted:    #8a6e58;
+  --border:   rgba(201,164,74,.2);
+  --serif: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --sans:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ease: .35s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--deep);color:var(--ivory);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.2;text-wrap:balance;color:var(--ivory)}
+h1{font-size:clamp(2rem,5vw,3.8rem);letter-spacing:-.3px}
+h2{font-size:clamp(1.5rem,3.5vw,2.4rem)}
+h3{font-size:clamp(1rem,2vw,1.35rem)}
+h4{font-size:1rem}
+
+.eyebrow{font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem}
+.gold-rule{width:50px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:1.5rem auto}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:1.5rem;padding:1.1rem 5%;background:rgba(19,9,4,.93);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:padding var(--ease)}
+nav.scrolled{padding:.75rem 5%}
+.nav-logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;flex-shrink:0}
+.nav-logo-mark{width:32px;height:32px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;color:var(--gold)}
+.nav-logo-name{display:block;font-family:var(--serif);font-size:1rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.nav-logo-sub{display:block;font-size:.55rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;margin-left:auto}
+.nav-links a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color var(--ease)}
+.nav-links a:hover{color:var(--gold-lt)}
+.lang-sw{display:flex;gap:.2rem}
+.lang-sw button{background:none;border:none;font-family:var(--sans);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:.2rem .35rem;transition:color var(--ease),background var(--ease)}
+.lang-sw button.active,.lang-sw button:hover{color:var(--gold);background:var(--gold-dim)}
+.nav-wa{display:flex;align-items:center;gap:.45rem;background:var(--gold);color:var(--deep);text-decoration:none;padding:.5rem 1rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background var(--ease);flex-shrink:0}
+.nav-wa:hover{background:var(--gold-lt)}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.3rem;margin-left:auto}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--gold);transition:transform var(--ease),opacity var(--ease)}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 5% 6rem;overflow:hidden}
+#grain-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
+.hero-inner{position:relative;z-index:1;max-width:800px}
+.hero h1{margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:.96rem;color:var(--muted);max-width:480px;margin:0 auto 2.5rem;line-height:1.75}
+.hero-ctas{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--deep);padding:.8rem 1.9rem;font-family:var(--sans);font-size:.73rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid var(--gold);cursor:pointer;transition:background var(--ease),border-color var(--ease)}
+.btn-primary:hover{background:var(--gold-lt);border-color:var(--gold-lt)}
+.btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold);padding:.8rem 1.9rem;font-family:var(--sans);font-size:.73rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);cursor:pointer;transition:background var(--ease),color var(--ease)}
+.btn-outline:hover{background:var(--gold-dim);color:var(--gold-lt)}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;z-index:1}
+.scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.3;transform:scaleY(.5)}}
+
+/* ── STATS ── */
+.stats-bar{background:var(--warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 5%}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:860px;margin:0 auto;text-align:center}
+.stat-num{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.5rem);color:var(--gold);font-variant-numeric:tabular-nums;display:block;line-height:1}
+.stat-label{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.4rem;display:block}
+
+/* ── SECTIONS ── */
+section{padding:5.5rem 5%}
+.sec-inner{max-width:1080px;margin:0 auto}
+.sec-header{text-align:center;margin-bottom:3.5rem}
+.sec-header h2{margin-bottom:.6rem}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:none}
+
+/* ── SERVICES ── */
+.services-sec{background:var(--rich)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px}
+.svc-card{background:var(--card);border:1px solid var(--border);padding:2.25rem 1.75rem;position:relative;overflow:hidden;transition:background var(--ease),border-color var(--ease)}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform var(--ease)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-card:hover{background:var(--warm);border-color:rgba(201,164,74,.4)}
+.svc-icon{width:40px;height:40px;color:var(--gold);margin-bottom:1.25rem}
+.svc-card h3{margin-bottom:.6rem;font-size:1.05rem}
+.svc-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+
+/* ── PRICING ── */
+.pricing-sec{background:var(--deep)}
+.city-tabs{display:flex;border:1px solid var(--border);width:fit-content;margin:0 auto 3rem}
+.city-tab{background:none;border:none;padding:.7rem 2.2rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color var(--ease),background var(--ease)}
+.city-tab.active{background:var(--gold);color:var(--deep);font-weight:700}
+.city-tab:not(.active):hover{color:var(--gold);background:var(--gold-dim)}
+.pricing-panel{display:none}
+.pricing-panel.active{display:block}
+.pkgs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:2rem}
+.pkg-card{background:var(--card);border:1px solid var(--border);padding:2.25rem 1.75rem;position:relative}
+.pkg-card.featured{border-color:var(--gold);background:var(--warm)}
+.pkg-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--deep);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.28rem .8rem;white-space:nowrap}
+.pkg-name{font-family:var(--serif);font-size:1.3rem;color:var(--gold-lt);margin-bottom:.2rem}
+.pkg-area{font-size:.72rem;color:var(--muted);letter-spacing:.06em;margin-bottom:1.25rem}
+.pkg-price{font-size:1.9rem;font-family:var(--serif);color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+.pkg-price span{font-size:.95rem;color:var(--muted)}
+.pkg-feats{list-style:none;margin-top:1.25rem;display:flex;flex-direction:column;gap:.55rem}
+.pkg-feats li{font-size:.82rem;color:var(--muted);display:flex;align-items:flex-start;gap:.55rem}
+.pkg-feats li::before{content:'—';color:var(--gold);flex-shrink:0;font-size:.78rem}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border)}
+.price-tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price-tbl th{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding:.9rem 1.4rem;text-align:left;border-bottom:1px solid var(--border);background:var(--warm)}
+.price-tbl td{padding:.85rem 1.4rem;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ivory)}
+.price-tbl tr:last-child td{border-bottom:none}
+.price-tbl tr:hover td{background:var(--gold-dim)}
+.price-tbl .pv{color:var(--gold-lt);font-family:var(--serif);font-size:.95rem}
+
+/* ── CALCULATOR ── */
+.calc-sec{background:var(--warm)}
+.calc-card{background:var(--card);border:1px solid var(--border);padding:2.75rem;max-width:680px;margin:0 auto}
+.calc-city-row{display:flex;gap:.5rem;margin-bottom:2rem}
+.calc-city-btn{flex:1;background:none;border:1px solid var(--border);padding:.6rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all var(--ease)}
+.calc-city-btn.active{background:var(--gold);color:var(--deep);border-color:var(--gold);font-weight:700}
+.calc-form{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.cf{display:flex;flex-direction:column;gap:.45rem}
+.cf label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.cf select{background:var(--warm);border:1px solid var(--border);color:var(--ivory);padding:.65rem .9rem;font-family:var(--sans);font-size:.88rem;appearance:none;-webkit-appearance:none;outline:none;cursor:pointer;transition:border-color var(--ease);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a44a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
+.cf select:focus{border-color:var(--gold)}
+.calc-addons-row{grid-column:1/-1}
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.65rem;margin-top:.65rem}
+.addon-lbl{display:flex;align-items:center;gap:.55rem;cursor:pointer}
+.addon-lbl input{accent-color:var(--gold);width:14px;height:14px;cursor:pointer}
+.addon-lbl span{font-size:.82rem;color:var(--muted)}
+.calc-result{background:var(--warm);border:1px solid var(--gold);padding:1.4rem 1.75rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.cr-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cr-price{font-family:var(--serif);font-size:2.1rem;color:var(--gold);font-variant-numeric:tabular-nums}
+.cr-note{font-size:.73rem;color:var(--muted);margin-top:1rem;line-height:1.5}
+
+/* ── HOW WE WORK ── */
+.how-sec{background:var(--rich)}
+.timeline{max-width:600px;margin:0 auto;position:relative}
+.timeline::before{content:'';position:absolute;left:21px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold) 60%,transparent)}
+.tl-item{display:flex;align-items:flex-start;gap:1.75rem;padding-bottom:2.25rem;position:relative}
+.tl-num{width:42px;height:42px;flex-shrink:0;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.78rem;color:var(--gold);background:var(--rich);position:relative;z-index:1}
+.tl-body{padding-top:.5rem}
+.tl-body h4{color:var(--gold-lt);margin-bottom:.3rem;font-size:.95rem}
+.tl-body p{font-size:.84rem;color:var(--muted)}
+
+/* ── BEFORE / AFTER ── */
+.ba-sec{background:var(--deep);padding:5.5rem 5%}
+.ba-wrap{max-width:780px;margin:0 auto}
+.ba-container{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid var(--border);user-select:none}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.ba-before{background:radial-gradient(ellipse at 60% 40%,#3a2010 0%,#1e0e07 55%,#130904 100%)}
+.ba-after{clip-path:inset(0 50% 0 0);transition:clip-path .04s linear;background:radial-gradient(ellipse at 40% 50%,#1a0e06 0%,#0d0603 60%,#050301 100%)}
+.ba-label{position:absolute;font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid;pointer-events:none}
+.ba-label-before{bottom:1.2rem;left:1.2rem;border-color:var(--muted);color:var(--muted)}
+.ba-label-after{bottom:1.2rem;right:1.2rem;border-color:var(--gold);color:var(--gold)}
+/* Simulated dust in "before" */
+.ba-before::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(120,70,30,.04) 9px),repeating-linear-gradient(90deg,transparent,transparent 12px,rgba(100,60,20,.03) 13px)}
+/* Simulated shine in "after" */
+.ba-after::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(201,164,74,.07) 0%,transparent 55%)}
+.ba-divider{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;transform:translateX(-50%);z-index:5;pointer-events:none}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(201,164,74,.2)}
+.ba-handle svg{width:14px;height:14px;color:var(--deep)}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:10;margin:0}
+.ba-note{text-align:center;font-size:.73rem;color:var(--muted);margin-top:1.25rem;letter-spacing:.04em}
+
+/* ── WHY US ── */
+.why-sec{background:var(--warm);padding:5.5rem 5%}
+.why-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.why-list{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin-top:2.25rem}
+.why-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.92rem}
+.w-check{width:17px;height:17px;flex-shrink:0;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-top:.18rem}
+.w-check::after{content:'';width:7px;height:4px;border-left:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);transform:rotate(-45deg) translateY(-1px)}
+.guarantees{display:flex;flex-direction:column;gap:1.25rem;margin-top:2.25rem}
+.g-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.4rem 1.6rem}
+.g-card h4{color:var(--gold-lt);margin-bottom:.35rem}
+.g-card p{font-size:.84rem;color:var(--muted)}
+
+/* ── MEMBERSHIP ── */
+.mem-sec{background:var(--deep)}
+.mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.mem-card{background:var(--card);border:1px solid var(--border);padding:2.25rem 1.75rem;text-align:center;position:relative;transition:border-color var(--ease),transform var(--ease)}
+.mem-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.mem-card.featured{border-color:var(--gold);background:var(--warm)}
+.mem-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--deep);font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.28rem .9rem;white-space:nowrap}
+.mem-tier{font-family:var(--serif);font-size:1.25rem;color:var(--gold-lt);margin-bottom:.9rem}
+.mem-price{font-family:var(--serif);font-size:2.2rem;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+.mem-price sub{font-size:.9rem;color:var(--muted);vertical-align:baseline}
+.mem-desc{font-size:.8rem;color:var(--muted);margin:1rem 0 1.5rem;line-height:1.55}
+.mem-btn{display:block;width:100%;padding:.75rem;background:none;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background var(--ease),color var(--ease)}
+.mem-btn:hover,.mem-card.featured .mem-btn{background:var(--gold);color:var(--deep)}
+
+/* ── REVIEWS ── */
+.reviews-sec{background:var(--rich)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.rev-card{background:var(--card);border:1px solid var(--border);padding:1.9rem}
+.rev-stars{color:var(--gold);font-size:.85rem;letter-spacing:.05em;margin-bottom:.9rem}
+.rev-text{font-size:.84rem;color:var(--ivory);line-height:1.7;font-style:italic;margin-bottom:1.4rem}
+.rev-author{display:flex;align-items:center;gap:.7rem}
+.rev-avatar{width:34px;height:34px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.85rem;color:var(--gold);flex-shrink:0}
+.rev-name{font-size:.82rem;color:var(--gold-lt)}
+.rev-loc{font-size:.72rem;color:var(--muted)}
+
+/* ── CONTACT ── */
+.contact-sec{background:var(--warm)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:1080px;margin:0 auto}
+.contact-info{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
+.ci-item{display:flex;align-items:flex-start;gap:.9rem}
+.ci-icon{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.ci-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.1rem}
+.ci-val{color:var(--ivory);font-size:.9rem}
+.ci-val a{color:var(--ivory);text-decoration:none}
+.ci-val a:hover{color:var(--gold)}
+.contact-form{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.ff{display:flex;flex-direction:column;gap:.4rem}
+.ff label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.ff input,.ff textarea,.ff select{background:var(--card);border:1px solid var(--border);color:var(--ivory);padding:.7rem .95rem;font-family:var(--sans);font-size:.88rem;outline:none;transition:border-color var(--ease);width:100%}
+.ff input:focus,.ff textarea:focus{border-color:var(--gold)}
+.ff textarea{resize:vertical;min-height:90px}
+.ff select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a44a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;cursor:pointer}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem 5%;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.ft-tag{font-family:var(--serif);font-size:.88rem;font-style:italic;color:var(--gold-dk)}
+.ft-copy{font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav-links{display:none}.hamburger{display:flex}.nav-wa{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(19,9,4,.98);padding:2rem 5%;gap:1.5rem;border-bottom:1px solid var(--border);z-index:99}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .pkgs-grid{grid-template-columns:1fr}
+  .mem-grid{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr;gap:3rem}
+  .contact-grid{grid-template-columns:1fr;gap:2rem}
+  .calc-form{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+}
+@media(max-width:600px){
+  section{padding:4rem 5%}
+  .svc-grid{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .hero-ctas .btn-primary,.hero-ctas .btn-outline{justify-content:center}
+  .calc-card{padding:1.5rem}
+  .ba-container{aspect-ratio:4/3}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">L</div>
+    <span>
+      <span class="nav-logo-name">Luminous</span>
+      <span class="nav-logo-sub">Cleaning Services</span>
+    </span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#services" data-i18n="nav_services">Služby</a></li>
+    <li><a href="#pricing" data-i18n="nav_pricing">Ceník</a></li>
+    <li><a href="#membership" data-i18n="nav_membership">Členství</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+  </ul>
+  <div class="lang-sw">
+    <button class="active" onclick="setLang('cs')">CS</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('sk')">SK</button>
+    <button onclick="setLang('uk')">UA</button>
+    <button onclick="setLang('ru')">RU</button>
+  </div>
+  <a href="https://wa.me/420000000000" class="nav-wa" target="_blank" rel="noopener">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    WhatsApp
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="grain-canvas"></canvas>
+  <div class="hero-inner fade-up">
+    <span class="eyebrow" data-i18n="hero_eyebrow">PRÉMIOVÝ ÚKLIDOVÝ SERVIS · PRAHA &amp; BRATISLAVA</span>
+    <h1 data-i18n-html="hero_h1">Přijďte domů do <em>dokonale čistého</em> prostoru</h1>
+    <div class="gold-rule"></div>
+    <p class="hero-sub" data-i18n="hero_sub">Profesionální tým, přesné ceny, garance spokojenosti.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary" data-i18n="btn_book">Objednat úklid</a>
+      <a href="#contact" class="btn-outline" data-i18n="btn_custom">Poptat individuální péči</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="fade-up"><span class="stat-num" data-count="1000">0</span><span class="stat-label" data-i18n="stats_clients">spokojených klientů</span></div>
+    <div class="fade-up"><span class="stat-num" data-count="2">0</span><span class="stat-label" data-i18n="stats_cities">města</span></div>
+    <div class="fade-up"><span class="stat-num" data-count="5">0</span><span class="stat-label" data-i18n="stats_years">let zkušeností</span></div>
+    <div class="fade-up"><span class="stat-num">100%</span><span class="stat-label" data-i18n="stats_guarantee">garance spokojenosti</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-sec" id="services">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Co nabízíme</span>
+      <h2 data-i18n="section_services">Naše služby</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34V18L20 8l14 10v16H6z"/><rect x="15" y="24" width="10" height="10"/><path d="M12 18h16"/></svg>
+        <h3 data-i18n="svc1_name">Premium Home Cleaning</h3>
+        <p data-i18n="svc1_desc">Pravidelná péče o váš domov s maximální precizností.</p>
+      </div>
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="20" cy="20" r="5"/><line x1="20" y1="4" x2="20" y2="9"/><line x1="20" y1="31" x2="20" y2="36"/><line x1="4" y1="20" x2="9" y2="20"/><line x1="31" y1="20" x2="36" y2="20"/><line x1="8.7" y1="8.7" x2="12.2" y2="12.2"/><line x1="27.8" y1="27.8" x2="31.3" y2="31.3"/><line x1="31.3" y1="8.7" x2="27.8" y2="12.2"/><line x1="12.2" y1="27.8" x2="8.7" y2="31.3"/></svg>
+        <h3 data-i18n="svc2_name">Deep Cleaning</h3>
+        <p data-i18n="svc2_desc">Hloubkové čištění každého prostoru do posledního detailu.</p>
+      </div>
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="22" cy="14" r="6"/><path d="M16 14h-8M8 14v8l4 4"/><path d="M26 14l8 8-4 4"/></svg>
+        <h3 data-i18n="svc3_name">Airbnb Property Care</h3>
+        <p data-i18n="svc3_desc">Kompletní servis krátkodobých pronájmů včetně fotodokumentace.</p>
+      </div>
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="28" height="22"/><path d="M2 14h36M14 14V8h12v6"/><line x1="14" y1="22" x2="26" y2="22"/><line x1="14" y1="28" x2="26" y2="28"/></svg>
+        <h3 data-i18n="svc4_name">Office Premium Care</h3>
+        <p data-i18n="svc4_desc">Profesionální úklid kanceláří a obchodních prostor.</p>
+      </div>
+      <div class="svc-card fade-up">
+        <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 28l-6 6M16 8l16 16-8 8L8 16z"/><path d="M24 6l10 10"/><circle cx="29" cy="11" r="3"/></svg>
+        <h3 data-i18n="svc5_name">After Renovation Cleaning</h3>
+        <p data-i18n="svc5_desc">Dokonalá příprava prostoru po rekonstrukci.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-sec" id="pricing">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Transparentní ceny</span>
+      <h2 data-i18n="section_pricing">Ceník</h2>
+    </div>
+    <div class="city-tabs fade-up">
+      <button class="city-tab active" onclick="switchCity('praha')" data-i18n="tab_prague">Praha</button>
+      <button class="city-tab" onclick="switchCity('brno')" data-i18n="tab_brno">Bratislava</button>
+    </div>
+
+    <!-- Praha panel -->
+    <div class="pricing-panel active" id="panel-praha">
+      <div class="pkgs-grid fade-up">
+        <div class="pkg-card">
+          <div class="pkg-name">Basic</div>
+          <div class="pkg-area">byt do 50 m²</div>
+          <div class="pkg-price">1 490 <span>CZK</span></div>
+          <ul class="pkg-feats">
+            <li>Standardní úklid</li>
+            <li>Podlahy &amp; povrchy</li>
+            <li>Koupelna &amp; WC</li>
+          </ul>
+        </div>
+        <div class="pkg-card featured">
+          <div class="pkg-badge" data-i18n="pkg_popular">Nejoblíbenější</div>
+          <div class="pkg-name">Comfort</div>
+          <div class="pkg-area">byt 50–80 m²</div>
+          <div class="pkg-price">2 190 <span>CZK</span></div>
+          <ul class="pkg-feats">
+            <li>Vše z Basic</li>
+            <li>Kuchyň do detailu</li>
+            <li>Prach &amp; detaily</li>
+            <li>Leštění povrchů</li>
+          </ul>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-name">Premium</div>
+          <div class="pkg-area">byt 80–100 m²</div>
+          <div class="pkg-price">2 990 <span>CZK</span></div>
+          <ul class="pkg-feats">
+            <li>Vše z Comfort</li>
+            <li>Hloubkový úklid</li>
+            <li>Detailní péče</li>
+            <li>Skříně &amp; zásuvky</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tbl-wrap fade-up" style="margin-top:1rem">
+        <table class="price-tbl">
+          <thead><tr><th>Služba</th><th>Cena</th></tr></thead>
+          <tbody>
+            <tr><td>Generální úklid</td><td class="pv">+40 %</td></tr>
+            <tr><td>Airbnb turnover</td><td class="pv">990 CZK</td></tr>
+            <tr><td>Po rekonstrukci</td><td class="pv">od 65 CZK/m²</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bratislava panel -->
+    <div class="pricing-panel" id="panel-brno">
+      <div class="tbl-wrap fade-up">
+        <table class="price-tbl">
+          <thead><tr><th>Služba</th><th>Cena</th></tr></thead>
+          <tbody>
+            <tr><td>Pravidelný úklid bytu 1+kk / 1+1</td><td class="pv">od 39 €</td></tr>
+            <tr><td>Pravidelný úklid bytu 2+kk / 2+1</td><td class="pv">od 49 €</td></tr>
+            <tr><td>Pravidelný úklid bytu 3+kk / 3+1</td><td class="pv">od 59 €</td></tr>
+            <tr><td>Generální úklid bytu 1+kk / 1+1</td><td class="pv">od 79 €</td></tr>
+            <tr><td>Generální úklid bytu 2+kk / 2+1</td><td class="pv">od 99 €</td></tr>
+            <tr><td>Generální úklid bytu 3+kk / 3+1</td><td class="pv">od 119 €</td></tr>
+            <tr><td>Úklid po stěhování</td><td class="pv">od 99 €</td></tr>
+            <tr><td>Mytí oken</td><td class="pv">od 25 €</td></tr>
+            <tr><td>Úklid po rekonstrukci</td><td class="pv">od 3,5 €/m²</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-sec" id="calculator">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Spočítejte si cenu</span>
+      <h2 data-i18n="calc_title">Kalkulačka ceny</h2>
+    </div>
+    <div class="calc-card fade-up">
+      <div class="calc-city-row">
+        <button class="calc-city-btn active" onclick="setCalcCity('praha')" data-i18n="tab_prague">Praha (CZK)</button>
+        <button class="calc-city-btn" onclick="setCalcCity('bratislava')" data-i18n="tab_brno">Bratislava (EUR)</button>
+      </div>
+      <div class="calc-form" id="calc-form-praha">
+        <div class="cf">
+          <label data-i18n="calc_area">Výměra bytu</label>
+          <select id="p-area" onchange="calcPrice()">
+            <option value="1490">30–40 m²</option>
+            <option value="2190">50–70 m²</option>
+            <option value="2990">80–100 m²</option>
+          </select>
+        </div>
+        <div class="cf">
+          <label data-i18n="calc_service">Typ úklidu</label>
+          <select id="p-type" onchange="calcPrice()">
+            <option value="1">Standardní</option>
+            <option value="1.4">Generální (+40 %)</option>
+            <option value="airbnb">Airbnb turnover</option>
+          </select>
+        </div>
+        <div class="cf calc-addons-row">
+          <label data-i18n="calc_addons">Doplňkové služby</label>
+          <div class="addons-grid">
+            <label class="addon-lbl"><input type="checkbox" value="500" onchange="calcPrice()"><span>Mytí oken +500 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span>Čištění lednice +300 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span>Čištění trouby +300 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="200" onchange="calcPrice()"><span>Balkon +200 CZK</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="calc-form" id="calc-form-bratislava" style="display:none">
+        <div class="cf">
+          <label data-i18n="calc_area">Velikost bytu</label>
+          <select id="b-size" onchange="calcPriceBrno()">
+            <option value="39">1+kk / 1+1</option>
+            <option value="49">2+kk / 2+1</option>
+            <option value="59">3+kk / 3+1</option>
+          </select>
+        </div>
+        <div class="cf">
+          <label data-i18n="calc_service">Typ úklidu</label>
+          <select id="b-type" onchange="calcPriceBrno()">
+            <option value="1">Pravidelný</option>
+            <option value="deep">Generální</option>
+            <option value="move">Po stěhování (99 €)</option>
+          </select>
+        </div>
+        <div class="cf calc-addons-row">
+          <label data-i18n="calc_addons">Doplňkové služby</label>
+          <div class="addons-grid">
+            <label class="addon-lbl"><input type="checkbox" value="25" onchange="calcPriceBrno()"><span>Mytí oken +25 €</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span>Čištění lednice +15 €</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span>Čištění trouby +15 €</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div><div class="cr-label" data-i18n="calc_result">Orientační cena</div><div class="cr-price" id="calc-output">1 490 CZK</div></div>
+        <a href="#contact" class="btn-primary" data-i18n="btn_book">Objednat</a>
+      </div>
+      <p class="cr-note" data-i18n="calc_note">Uvedené ceny jsou orientační. Konečná cena závisí na stavu bytu a individuálních požadavcích.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="how-sec" id="how">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Náš proces</span>
+      <h2 data-i18n="section_how">Jak pracujeme</h2>
+    </div>
+    <div class="timeline fade-up">
+      <div class="tl-item"><div class="tl-num">01</div><div class="tl-body"><h4 data-i18n="how_step1">Objednávka</h4><p data-i18n="how_desc1">Vyberete službu a termín online nebo telefonicky.</p></div></div>
+      <div class="tl-item"><div class="tl-num">02</div><div class="tl-body"><h4 data-i18n="how_step2">Příprava návštěvy</h4><p data-i18n="how_desc2">Přizpůsobíme péči konkrétním potřebám vašeho prostoru.</p></div></div>
+      <div class="tl-item"><div class="tl-num">03</div><div class="tl-body"><h4 data-i18n="how_step3">Profesionální úklid</h4><p data-i18n="how_desc3">Náš prověřený tým provede kompletní servis.</p></div></div>
+      <div class="tl-item"><div class="tl-num">04</div><div class="tl-body"><h4 data-i18n="how_step4">Kontrola kvality</h4><p data-i18n="how_desc4">Každý detail projde naší interní kontrolou kvality.</p></div></div>
+      <div class="tl-item" style="padding-bottom:0"><div class="tl-num">05</div><div class="tl-body"><h4 data-i18n="how_step5">Hotovo</h4><p data-i18n="how_desc5">Váš domov je připraven. Pošleme fotodokumentaci.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ba-sec" id="before-after">
+  <div class="sec-header fade-up" style="margin-bottom:2.5rem">
+    <span class="eyebrow">Výsledky práce</span>
+    <h2>Před &amp; Po</h2>
+  </div>
+  <div class="ba-wrap fade-up">
+    <div class="ba-container" id="ba">
+      <div class="ba-before">
+        <span class="ba-label ba-label-before">Před</span>
+      </div>
+      <div class="ba-after" id="ba-after">
+        <span class="ba-label ba-label-after">Po</span>
+      </div>
+      <div class="ba-divider" id="ba-divider">
+        <div class="ba-handle">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7H1M13 7h-3M5 4L2 7l3 3M9 4l3 3-3 3"/></svg>
+        </div>
+      </div>
+      <input type="range" class="ba-range" id="ba-range" min="0" max="100" value="50">
+    </div>
+    <p class="ba-note" data-i18n="ba_note">Přetáhněte posuvník · Nahraďte obrázky vlastními fotografiemi před a po úklidu.</p>
+  </div>
+</section>
+
+<!-- WHY US + GUARANTEES -->
+<section class="why-sec" id="why">
+  <div class="why-grid">
+    <div class="fade-up">
+      <span class="eyebrow">Proč si nás vybrat</span>
+      <h2 data-i18n="section_why">Proč Luminous</h2>
+      <ul class="why-list">
+        <li><div class="w-check"></div><span data-i18n="why1">Prověření a školení profesionálové</span></li>
+        <li><div class="w-check"></div><span data-i18n="why2">Kontrola kvality každého úklidu</span></li>
+        <li><div class="w-check"></div><span data-i18n="why3">Transparentní pevné ceny</span></li>
+        <li><div class="w-check"></div><span data-i18n="why4">Spolehlivost a diskrétnost</span></li>
+        <li><div class="w-check"></div><span data-i18n="why5">Péče podle standardů prémiových domácností</span></li>
+      </ul>
+    </div>
+    <div class="fade-up">
+      <span class="eyebrow">Naše závazky</span>
+      <h2 data-i18n="section_guarantees">Naše garance</h2>
+      <div class="guarantees">
+        <div class="g-card"><h4 data-i18n="g1_title">Přijedeme včas</h4><p data-i18n="g1_desc">Pokud se opozdíme — okamžitá sleva bez nutnosti reklamace.</p></div>
+        <div class="g-card"><h4 data-i18n="g2_title">Garance spokojenosti</h4><p data-i18n="g2_desc">Pokud klient není spokojený — úklid zopakujeme zdarma.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="mem-sec" id="membership">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Pravidelná péče</span>
+      <h2 data-i18n="section_membership">Členství</h2>
+    </div>
+    <div class="mem-grid fade-up">
+      <div class="mem-card">
+        <div class="mem-tier" data-i18n="mem_silver">Silver</div>
+        <div class="mem-price">99 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-desc"><span data-i18n="mem_clean2">2</span> <span data-i18n="mem_cleanings">úklidy / měsíc</span></div>
+        <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
+      </div>
+      <div class="mem-card featured">
+        <div class="mem-badge" data-i18n="pkg_popular">Nejoblíbenější</div>
+        <div class="mem-tier" data-i18n="mem_gold">Gold</div>
+        <div class="mem-price">189 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-desc"><span data-i18n="mem_clean4">4</span> <span data-i18n="mem_cleanings">úklidy / měsíc</span></div>
+        <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
+      </div>
+      <div class="mem-card">
+        <div class="mem-tier" data-i18n="mem_platinum">Platinum</div>
+        <div class="mem-price">299 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-desc">4 <span data-i18n="mem_cleanings">úklidy / měsíc</span> <br><span data-i18n="mem_addons">+ doplňkové služby</span></div>
+        <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--muted)" data-i18n="mem_monthly_note">Home Care Monthly Praha: 4 úklidy za 6 990 CZK (místo 4 × 2 190 CZK)</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-sec" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-header fade-up">
+      <span class="eyebrow">Reference</span>
+      <h2 data-i18n="section_reviews">Co říkají naši klienti</h2>
+    </div>
+    <div class="rev-grid fade-up">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Naprostá profesionalita. Přišli včas, pracovali tiše a výsledek překonal moje očekávání. Byt vypadá lépe než při nastěhování."</p>
+        <div class="rev-author"><div class="rev-avatar">M</div><div><div class="rev-name">Markéta V.</div><div class="rev-loc">Praha 2</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Využívám Luminous pro svůj Airbnb byt už půl roku. Hosté vždy chválí čistotu a já mám klid. Zpráva po každém úklidu je skvělý bonus."</p>
+        <div class="rev-author"><div class="rev-avatar">T</div><div><div class="rev-name">Tomáš R.</div><div class="rev-loc">Praha 7</div></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Generální úklid po rekonstrukci — fantastická práce. Prach z vrtání byl všude a za pár hodin bylo vše zářivě čisté. Doporučuji všem."</p>
+        <div class="rev-author"><div class="rev-avatar">L</div><div><div class="rev-name">Lucia K.</div><div class="rev-loc">Bratislava</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="sec-header fade-up sec-inner" style="margin-bottom:3rem">
+    <span class="eyebrow">Spojte se s námi</span>
+    <h2 data-i18n="section_contact">Kontakt</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="fade-up">
+      <p style="color:var(--muted);font-size:.9rem;max-width:380px" data-i18n="contact_intro">Rádi vám připravíme nezávaznou cenovou nabídku přesně na míru vašemu prostoru.</p>
+      <div class="contact-info">
+        <div class="ci-item">
+          <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg></div>
+          <div><div class="ci-label" data-i18n="contact_phone">Telefon</div><div class="ci-val"><a href="tel:+420000000000">+420 000 000 000</a></div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+          <div><div class="ci-label" data-i18n="contact_wa">WhatsApp</div><div class="ci-val"><a href="https://wa.me/420000000000" target="_blank" rel="noopener">+420 000 000 000</a></div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+          <div><div class="ci-label" data-i18n="contact_email">E-mail</div><div class="ci-val"><a href="mailto:info@luminous.cz">info@luminous.cz</a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="ff"><label data-i18n="form_name">Jméno</label><input type="text" required placeholder="Vaše jméno"></div>
+        <div class="ff"><label data-i18n="form_email">E-mail</label><input type="email" required placeholder="vas@email.cz"></div>
+        <div class="ff">
+          <label data-i18n="form_service">Služba</label>
+          <select>
+            <option>Premium Home Cleaning</option>
+            <option>Deep Cleaning</option>
+            <option>Airbnb Property Care</option>
+            <option>Office Premium Care</option>
+            <option>After Renovation Cleaning</option>
+          </select>
+        </div>
+        <div class="ff"><label data-i18n="form_msg">Zpráva</label><textarea placeholder="Popište prostor a vaše požadavky..."></textarea></div>
+        <button type="submit" class="btn-primary" style="justify-content:center" data-i18n="form_send">Odeslat poptávku</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div style="font-family:var(--serif);font-size:1.1rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem">Luminous</div>
+    <div class="ft-tag">"Come home to a perfectly clean space."</div>
+  </div>
+  <div class="ft-copy">© <span id="yr"></span> Luminous Cleaning Services. <span data-i18n="footer_copy">Všechna práva vyhrazena.</span></div>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const T = {
+  cs:{nav_services:'Služby',nav_pricing:'Ceník',nav_membership:'Členství',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ ÚKLIDOVÝ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Přijďte domů do <em>dokonale čistého</em> prostoru',hero_sub:'Profesionální tým, přesné ceny, garance spokojenosti.',btn_book:'Objednat úklid',btn_custom:'Poptat individuální péči',stats_clients:'spokojených klientů',stats_cities:'města',stats_years:'let zkušeností',stats_guarantee:'garance spokojenosti',section_services:'Naše služby',section_pricing:'Ceník',section_how:'Jak pracujeme',section_why:'Proč Luminous',section_guarantees:'Naše garance',section_membership:'Členství',section_reviews:'Co říkají naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná péče o váš domov s maximální precizností.',svc2_name:'Deep Cleaning',svc2_desc:'Hloubkové čištění každého prostoru do posledního detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletní servis krátkodobých pronájmů včetně fotodokumentace.',svc4_name:'Office Premium Care',svc4_desc:'Profesionální úklid kanceláří a obchodních prostor.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá příprava prostoru po rekonstrukci.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výměra bytu',calc_service:'Typ úklidu',calc_addons:'Doplňkové služby',calc_result:'Orientační cena',calc_note:'Uvedené ceny jsou orientační. Konečná cena závisí na stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberete službu a termín online nebo telefonicky.',how_step2:'Příprava návštěvy',how_desc2:'Přizpůsobíme péči konkrétním potřebám vašeho prostoru.',how_step3:'Profesionální úklid',how_desc3:'Náš prověřený tým provede kompletní servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail projde naší interní kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je připraven. Pošleme fotodokumentaci.',g1_title:'Přijedeme včas',g1_desc:'Pokud se opozdíme — okamžitá sleva bez nutnosti reklamace.',g2_title:'Garance spokojenosti',g2_desc:'Pokud klient není spokojený — úklid zopakujeme zdarma.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / měsíc',mem_cleanings:'úklidy / měsíc',mem_addons:'+ doplňkové služby',mem_choose:'Vybrat plán',mem_monthly_note:'Home Care Monthly Praha: 4 úklidy za 6 990 CZK (místo 4 × 2 190 CZK)',why1:'Prověření a školení profesionálové',why2:'Kontrola kvality každého úklidu',why3:'Transparentní pevné ceny',why4:'Spolehlivost a diskrétnost',why5:'Péče podle standardů prémiových domácností',ba_note:'Přetáhněte posuvník · Nahraďte obrázky vlastními fotografiemi.',pkg_popular:'Nejoblíbenější',contact_intro:'Rádi vám připravíme nezávaznou cenovou nabídku přesně na míru.',contact_phone:'Telefon',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Jméno',form_email:'E-mail',form_service:'Služba',form_msg:'Zpráva',form_send:'Odeslat poptávku',footer_copy:'Všechna práva vyhrazena.'},
+  en:{nav_services:'Services',nav_pricing:'Pricing',nav_membership:'Membership',nav_contact:'Contact',hero_eyebrow:'PREMIUM CLEANING SERVICE · PRAGUE & BRATISLAVA',hero_h1:'Come home to a <em>perfectly clean</em> space',hero_sub:'Professional team, clear pricing, satisfaction guaranteed.',btn_book:'Book a Cleaning',btn_custom:'Request Custom Care',stats_clients:'happy clients',stats_cities:'cities',stats_years:'years experience',stats_guarantee:'satisfaction guarantee',section_services:'Our Services',section_pricing:'Pricing',section_how:'How We Work',section_why:'Why Luminous',section_guarantees:'Our Guarantees',section_membership:'Membership',section_reviews:'What Our Clients Say',section_contact:'Contact',svc1_name:'Premium Home Cleaning',svc1_desc:'Regular care for your home with maximum precision.',svc2_name:'Deep Cleaning',svc2_desc:'Thorough cleaning of every space down to the last detail.',svc3_name:'Airbnb Property Care',svc3_desc:'Complete short-term rental service including photo documentation.',svc4_name:'Office Premium Care',svc4_desc:'Professional cleaning of offices and commercial spaces.',svc5_name:'After Renovation Cleaning',svc5_desc:'Perfect preparation of the space after renovation.',tab_prague:'Prague',tab_brno:'Bratislava',calc_title:'Price Calculator',calc_area:'Apartment size',calc_service:'Service type',calc_addons:'Additional services',calc_result:'Estimated price',calc_note:'Prices are indicative. Final price depends on the condition and requirements.',how_step1:'Booking',how_desc1:'Choose your service and time slot online or by phone.',how_step2:'Preparation',how_desc2:"We tailor our care to your space's specific needs.",how_step3:'Professional Cleaning',how_desc3:'Our verified team carries out the complete service.',how_step4:'Quality Check',how_desc4:'Every detail goes through our internal quality check.',how_step5:'Done',how_desc5:"Your home is ready. We'll send photo documentation.",g1_title:'On Time, Every Time',g1_desc:"If we're late, you get a discount — no questions asked.",g2_title:'Satisfaction Guarantee',g2_desc:"Not satisfied? We'll re-clean for free.",mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / month',mem_cleanings:'cleanings / month',mem_addons:'+ additional services',mem_choose:'Choose Plan',mem_monthly_note:'Home Care Monthly Prague: 4 cleanings for 6,990 CZK (instead of 4 × 2,190 CZK)',why1:'Vetted and trained professionals',why2:'Quality check on every cleaning',why3:'Transparent fixed pricing',why4:'Reliability and discretion',why5:'Care to premium household standards',ba_note:'Drag the slider · Replace with your own before/after photos.',pkg_popular:'Most Popular',contact_intro:'We will gladly prepare a no-obligation quote tailored to your space.',contact_phone:'Phone',contact_wa:'WhatsApp',contact_email:'Email',form_name:'Name',form_email:'Email',form_service:'Service',form_msg:'Message',form_send:'Send Enquiry',footer_copy:'All rights reserved.'},
+  sk:{nav_services:'Služby',nav_pricing:'Cenník',nav_membership:'Členstvo',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ UPRATOVACÍ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Príďte domov do <em>dokonale čistého</em> priestoru',hero_sub:'Profesionálny tím, jasné ceny, garancia spokojnosti.',btn_book:'Objednať upratovanie',btn_custom:'Dopytovať individuálnu starostlivosť',stats_clients:'spokojných klientov',stats_cities:'mestá',stats_years:'rokov skúseností',stats_guarantee:'garancia spokojnosti',section_services:'Naše služby',section_pricing:'Cenník',section_how:'Ako pracujeme',section_why:'Prečo Luminous',section_guarantees:'Naše garancie',section_membership:'Členstvo',section_reviews:'Čo hovoria naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná starostlivosť o váš domov s maximálnou precíznosťou.',svc2_name:'Deep Cleaning',svc2_desc:'Hĺbkové čistenie každého priestoru do posledného detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletný servis krátkodobých prenájmov vrátane fotodokumentácie.',svc4_name:'Office Premium Care',svc4_desc:'Profesionálne upratovanie kancelárií a obchodných priestorov.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá príprava priestoru po rekonštrukcii.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výmera bytu',calc_service:'Typ upratovania',calc_addons:'Doplnkové služby',calc_result:'Orientačná cena',calc_note:'Ceny sú orientačné. Konečná cena závisí od stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberiete službu a termín online alebo telefonicky.',how_step2:'Príprava návštevy',how_desc2:'Prispôsobíme starostlivosť konkrétnym potrebám vášho priestoru.',how_step3:'Profesionálne upratovanie',how_desc3:'Náš overený tím vykoná kompletný servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail prejde našou internou kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je pripravený. Pošleme fotodokumentáciu.',g1_title:'Prídem včas',g1_desc:'Ak sa oneskoríme — okamžitá zľava bez reklamácie.',g2_title:'Garancia spokojnosti',g2_desc:'Ak nie ste spokojní, upratujeme znovu zadarmo.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / mesiac',mem_cleanings:'upratovania / mesiac',mem_addons:'+ doplnkové služby',mem_choose:'Vybrať plán',mem_monthly_note:'Home Care Monthly Praha: 4 upratovania za 6 990 CZK',why1:'Overení a vyškolení profesionáli',why2:'Kontrola kvality každého upratovania',why3:'Transparentné pevné ceny',why4:'Spoľahlivosť a diskrétnosť',why5:'Starostlivosť podľa štandardov prémiových domácností',ba_note:'Potiahnite posuvník · Nahraďte vlastnými fotografiami.',pkg_popular:'Najobľúbenejší',contact_intro:'Radi vám pripravíme nezáväznú cenovú ponuku.',contact_phone:'Telefón',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Meno',form_email:'E-mail',form_service:'Služba',form_msg:'Správa',form_send:'Odoslať dopyt',footer_copy:'Všetky práva vyhradené.'},
+  uk:{nav_services:'Послуги',nav_pricing:'Ціни',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМІАЛЬНИЙ СЕРВІС ПРИБИРАННЯ · ПРАГА & БРАТИСЛАВА',hero_h1:'Повертайтеся додому в <em>ідеально чистий</em> простір',hero_sub:'Професійна команда, прозорі ціни, гарантія задоволеності.',btn_book:'Замовити прибирання',btn_custom:'Запросити індивідуальний догляд',stats_clients:'задоволених клієнтів',stats_cities:'міста',stats_years:'роки досвіду',stats_guarantee:'гарантія якості',section_services:'Наші послуги',section_pricing:'Ціни',section_how:'Як ми працюємо',section_why:'Чому Luminous',section_guarantees:'Наші гарантії',section_membership:'Членство',section_reviews:'Що кажуть наші клієнти',section_contact:'Контакт',svc1_name:'Преміальне прибирання',svc1_desc:'Регулярний догляд за вашим будинком з максимальною точністю.',svc2_name:'Глибоке прибирання',svc2_desc:'Детальне очищення кожного простору до останньої деталі.',svc3_name:'Догляд за Airbnb',svc3_desc:'Повний сервіс короткострокової оренди з фотодокументацією.',svc4_name:'Офісне прибирання',svc4_desc:'Професійне прибирання офісів і комерційних приміщень.',svc5_name:'Прибирання після ремонту',svc5_desc:'Ідеальна підготовка приміщення після ремонту.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор ціни',calc_area:'Площа квартири',calc_service:'Тип прибирання',calc_addons:'Додаткові послуги',calc_result:'Орієнтовна ціна',calc_note:'Ціни орієнтовні. Кінцева ціна залежить від стану.',how_step1:'Замовлення',how_desc1:'Оберіть послугу та час онлайн або по телефону.',how_step2:'Підготовка',how_desc2:'Адаптуємо догляд до конкретних потреб.',how_step3:'Професійне прибирання',how_desc3:'Наша перевірена команда виконує повний сервіс.',how_step4:'Контроль якості',how_desc4:'Кожна деталь проходить внутрішній контроль.',how_step5:'Готово',how_desc5:'Ваш будинок готовий. Надішлемо фотодокументацію.',g1_title:'Завжди вчасно',g1_desc:'Якщо запізнимося — знижка без запитань.',g2_title:'Гарантія задоволеності',g2_desc:'Не задоволені? Прибираємо повторно безкоштовно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / місяць',mem_cleanings:'прибирання / місяць',mem_addons:'+ додаткові послуги',mem_choose:'Обрати план',mem_monthly_note:'',why1:'Перевірені та навчені професіонали',why2:'Контроль якості кожного прибирання',why3:'Прозорі фіксовані ціни',why4:'Надійність і дискретність',why5:'Догляд за стандартами преміальних домівок',ba_note:'Перетягніть повзунок · Замініть власними фото.',pkg_popular:'Найпопулярніший',contact_intro:'Ми підготуємо безкоштовну пропозицію для вашого простору.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:"Ім'я",form_email:'E-mail',form_service:'Послуга',form_msg:'Повідомлення',form_send:'Надіслати запит',footer_copy:'Всі права захищені.'},
+  ru:{nav_services:'Услуги',nav_pricing:'Цены',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМИАЛЬНЫЙ КЛИНИНГ · ПРАГА & БРАТИСЛАВА',hero_h1:'Возвращайтесь домой в <em>идеально чистое</em> пространство',hero_sub:'Профессиональная команда, прозрачные цены, гарантия качества.',btn_book:'Заказать уборку',btn_custom:'Запросить индивидуальный уход',stats_clients:'довольных клиентов',stats_cities:'города',stats_years:'лет опыта',stats_guarantee:'гарантия качества',section_services:'Наши услуги',section_pricing:'Цены',section_how:'Как мы работаем',section_why:'Почему Luminous',section_guarantees:'Наши гарантии',section_membership:'Членство',section_reviews:'Что говорят клиенты',section_contact:'Контакт',svc1_name:'Премиальная уборка дома',svc1_desc:'Регулярный уход за вашим домом с максимальной точностью.',svc2_name:'Генеральная уборка',svc2_desc:'Глубокая чистка каждого пространства до мельчайших деталей.',svc3_name:'Обслуживание Airbnb',svc3_desc:'Полный сервис краткосрочной аренды включая фотодокументацию.',svc4_name:'Офисная уборка',svc4_desc:'Профессиональная уборка офисов и коммерческих помещений.',svc5_name:'Уборка после ремонта',svc5_desc:'Идеальная подготовка помещения после ремонта.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор цены',calc_area:'Площадь квартиры',calc_service:'Тип уборки',calc_addons:'Дополнительные услуги',calc_result:'Ориентировочная цена',calc_note:'Итоговая цена зависит от состояния и индивидуальных требований.',how_step1:'Заявка',how_desc1:'Выберите услугу и время онлайн или по телефону.',how_step2:'Подготовка',how_desc2:'Адаптируем уход под конкретные нужды вашего пространства.',how_step3:'Профессиональная уборка',how_desc3:'Наша проверенная команда выполняет полный сервис.',how_step4:'Контроль качества',how_desc4:'Каждая деталь проходит внутренний контроль качества.',how_step5:'Готово',how_desc5:'Ваш дом готов. Отправим фотодокументацию.',g1_title:'Всегда вовремя',g1_desc:'Если опоздаем — скидка без лишних слов.',g2_title:'Гарантия удовлетворённости',g2_desc:'Недовольны? Уберём повторно бесплатно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / месяц',mem_cleanings:'уборки / месяц',mem_addons:'+ дополнительные услуги',mem_choose:'Выбрать план',mem_monthly_note:'',why1:'Проверенные и обученные профессионалы',why2:'Контроль качества каждой уборки',why3:'Прозрачные фиксированные цены',why4:'Надёжность и дискретность',why5:'Уход по стандартам премиальных домов',ba_note:'Перетащите ползунок · Замените собственными фото.',pkg_popular:'Популярный',contact_intro:'Мы подготовим бесплатное предложение для вашего пространства.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'Эл. почта',form_name:'Имя',form_email:'Эл. почта',form_service:'Услуга',form_msg:'Сообщение',form_send:'Отправить запрос',footer_copy:'Все права защищены.'}
+};
+
+let currentLang = 'cs';
+let calcCity = 'praha';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const k = el.getAttribute('data-i18n-html');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('.lang-sw button').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-sw button[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang === 'uk' ? 'uk' : lang === 'ru' ? 'ru' : lang;
+}
+
+// ── CITY TABS ──
+function switchCity(city) {
+  document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + city).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── CALCULATOR ──
+function setCalcCity(city) {
+  calcCity = city;
+  document.querySelectorAll('.calc-city-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('calc-form-praha').style.display = city === 'praha' ? 'grid' : 'none';
+  document.getElementById('calc-form-bratislava').style.display = city === 'bratislava' ? 'grid' : 'none';
+  city === 'praha' ? calcPrice() : calcPriceBrno();
+}
+
+function calcPrice() {
+  const area = parseInt(document.getElementById('p-area').value);
+  const type = document.getElementById('p-type').value;
+  let price;
+  if (type === 'airbnb') {
+    price = 990;
+  } else {
+    price = Math.round(area * parseFloat(type));
+  }
+  document.querySelectorAll('#calc-form-praha input[type="checkbox"]:checked').forEach(cb => {
+    price += parseInt(cb.value);
+  });
+  document.getElementById('calc-output').textContent = price.toLocaleString('cs-CZ') + ' CZK';
+}
+
+function calcPriceBrno() {
+  const size = parseInt(document.getElementById('b-size').value);
+  const type = document.getElementById('b-type').value;
+  let price;
+  if (type === 'move') {
+    price = 99;
+  } else if (type === 'deep') {
+    const deepMap = {39:79,49:99,59:119};
+    price = deepMap[size] || size * 2;
+  } else {
+    price = size;
+  }
+  document.querySelectorAll('#calc-form-bratislava input[type="checkbox"]:checked').forEach(cb => {
+    price += parseInt(cb.value);
+  });
+  document.getElementById('calc-output').textContent = 'od ' + price + ' €';
+}
+
+// ── BEFORE/AFTER SLIDER ──
+const baRange = document.getElementById('ba-range');
+const baAfter = document.getElementById('ba-after');
+const baDivider = document.getElementById('ba-divider');
+function updateBA(v) {
+  baAfter.style.clipPath = `inset(0 ${100-v}% 0 0)`;
+  baDivider.style.left = v + '%';
+}
+baRange.addEventListener('input', e => updateBA(e.target.value));
+updateBA(50);
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+}, {passive: true});
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  const links = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  links.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+document.getElementById('nav-links').querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  });
+});
+
+// ── INTERSECTION OBSERVER (fade-up + counters) ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const num = entry.target.querySelector('[data-count]');
+      if (num) animateCount(num);
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.15});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+function animateCount(el) {
+  const target = parseInt(el.getAttribute('data-count'));
+  const suffix = target >= 1000 ? '+' : '';
+  let start = 0;
+  const duration = 1400;
+  const step = (ts) => {
+    if (!start) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(ease * target).toLocaleString('cs-CZ') + (progress >= 1 ? suffix : '');
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// ── GRAIN CANVAS ──
+(function() {
+  const canvas = document.getElementById('grain-canvas');
+  const ctx = canvas.getContext('2d');
+  let frame = 0;
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    const img = ctx.createImageData(w, h);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const v = (Math.random() * 40) | 0;
+      d[i] = d[i+1] = d[i+2] = v;
+      d[i+3] = 18;
+    }
+    ctx.putImageData(img, 0, 0);
+    frame++;
+    if (frame % 2 === 0) requestAnimationFrame(draw);
+    else setTimeout(() => requestAnimationFrame(draw), 80);
+  }
+  window.addEventListener('resize', resize, {passive: true});
+  resize();
+  draw();
+})();
+
+// ── FORM SUBMIT ──
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type="submit"]');
+  const orig = btn.textContent;
+  btn.textContent = '✓ Odesláno';
+  btn.style.background = '#4a7a4a';
+  btn.style.borderColor = '#4a7a4a';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.borderColor = ''; e.target.reset(); }, 3000);
+}
+
+// ── YEAR ──
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>

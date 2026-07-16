@@ -56,12 +56,24 @@ nav.scrolled{padding:.75rem 5%}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 
+.nav-more{position:relative;flex-shrink:0}
+.more-btn{display:flex;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.3rem}
+.more-btn span{display:block;width:20px;height:1.5px;background:var(--gold);transition:transform var(--ease),opacity var(--ease)}
+.more-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.more-btn.open span:nth-child(2){opacity:0}
+.more-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.more-menu{list-style:none;position:absolute;top:calc(100% + .9rem);right:0;background:rgba(19,9,4,.98);border:1px solid var(--border);min-width:220px;padding:.6rem 0;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity var(--ease),transform var(--ease);z-index:110}
+.more-menu.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.more-menu a{display:block;padding:.65rem 1.4rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color var(--ease),background var(--ease)}
+.more-menu a:hover{color:var(--gold-lt);background:var(--gold-dim)}
+
 /* ── HERO ── */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 5% 6rem;overflow:hidden}
 #grain-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 .hero-inner{position:relative;z-index:1;max-width:800px}
 .hero h1{margin-bottom:1.25rem}
 .hero h1 em{font-style:normal;color:var(--gold)}
+.hero-city-tabs{margin:0 auto 2rem}
 .hero-sub{font-size:.96rem;color:var(--muted);max-width:480px;margin:0 auto 2.5rem;line-height:1.75}
 .hero-ctas{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
 .btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--deep);padding:.8rem 1.9rem;font-family:var(--sans);font-size:.73rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid var(--gold);cursor:pointer;transition:background var(--ease),border-color var(--ease)}
@@ -259,7 +271,36 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* ── INTRO (disabled for now — see matching HTML/JS blocks) ──
+#intro-overlay{position:fixed;top:0;left:0;right:0;height:clamp(150px,24vh,210px);z-index:200;background:var(--deep);border-bottom:1px solid var(--border);overflow:hidden;opacity:1;transition:opacity .8s ease}
+#intro-overlay.hide{opacity:0;pointer-events:none}
+#intro-canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
+#intro-bee-wrap{position:absolute;top:0;left:0;width:68px;height:57px;margin:-28.5px 0 0 -34px;color:var(--gold);filter:drop-shadow(0 0 6px rgba(201,164,74,.55));opacity:0;transition:opacity .3s ease}
+#intro-bee-wrap svg{width:100%;height:100%;display:block}
+#intro-bee-wrap .wing{transform-box:fill-box;transform-origin:50% 15%;animation:bee-flutter .14s ease-in-out infinite alternate}
+@keyframes bee-flutter{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
+*/
 </style>
+
+<!-- INTRO (disabled for now — see matching CSS/JS blocks)
+<div id="intro-overlay" aria-hidden="true">
+  <canvas id="intro-canvas"></canvas>
+  <div id="intro-bee-wrap">
+    <svg viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g class="wing"><path d="M28,18 C18,8 6,10 8,20 C10,28 22,26 28,18 Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></g>
+      <g class="wing"><path d="M32,18 C42,8 54,10 52,20 C50,28 38,26 32,18 Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></g>
+      <ellipse cx="30" cy="30" rx="9" ry="15" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M21.5,24 Q30,27 38.5,24" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M21,31 Q30,34 39,31" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M22,38 Q30,41 38,38" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="30" cy="12" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M27,9 C25,5 22,4 20,5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      <path d="M33,9 C35,5 38,4 40,5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+-->
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -283,6 +324,17 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
     <button onclick="setLang('uk')">UA</button>
     <button onclick="setLang('ru')">RU</button>
   </div>
+  <div class="nav-more">
+    <button class="more-btn" id="more-btn" onclick="toggleMoreMenu()" aria-haspopup="true" aria-expanded="false" aria-label="Další odkazy">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="more-menu" id="more-menu">
+      <li><a href="#how" data-i18n="section_how">Jak pracujeme</a></li>
+      <li><a href="#why" data-i18n="section_why">Proč Luminous</a></li>
+      <li><a href="#guarantees" data-i18n="section_guarantees">Naše garance</a></li>
+      <li><a href="#reviews" data-i18n="section_reviews">Co říkají naši klienti</a></li>
+    </ul>
+  </div>
   <a href="https://wa.me/420000000000" class="nav-wa" target="_blank" rel="noopener">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     WhatsApp
@@ -297,6 +349,10 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
     <span class="eyebrow" data-i18n="hero_eyebrow">PRÉMIOVÝ ÚKLIDOVÝ SERVIS · PRAHA &amp; BRATISLAVA</span>
     <h1 data-i18n-html="hero_h1">Přijďte domů do <em>dokonale čistého</em> prostoru</h1>
     <div class="gold-rule"></div>
+    <div class="city-tabs hero-city-tabs">
+      <button class="city-tab active" data-city="praha" onclick="switchCity('praha')" data-i18n="tab_prague">Praha</button>
+      <button class="city-tab" data-city="brno" onclick="switchCity('brno')" data-i18n="tab_brno">Bratislava</button>
+    </div>
     <p class="hero-sub" data-i18n="hero_sub">Profesionální tým, přesné ceny, garance spokojenosti.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary" data-i18n="btn_book">Objednat úklid</a>
@@ -320,7 +376,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="services-sec" id="services">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Co nabízíme</span>
+      <span class="eyebrow" data-i18n="eyebrow_services">Co nabízíme</span>
       <h2 data-i18n="section_services">Naše služby</h2>
     </div>
     <div class="svc-grid">
@@ -357,12 +413,12 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="pricing-sec" id="pricing">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Transparentní ceny</span>
+      <span class="eyebrow" data-i18n="eyebrow_pricing">Transparentní ceny</span>
       <h2 data-i18n="section_pricing">Ceník</h2>
     </div>
     <div class="city-tabs fade-up">
-      <button class="city-tab active" onclick="switchCity('praha')" data-i18n="tab_prague">Praha</button>
-      <button class="city-tab" onclick="switchCity('brno')" data-i18n="tab_brno">Bratislava</button>
+      <button class="city-tab active" data-city="praha" onclick="switchCity('praha')" data-i18n="tab_prague">Praha</button>
+      <button class="city-tab" data-city="brno" onclick="switchCity('brno')" data-i18n="tab_brno">Bratislava</button>
     </div>
 
     <!-- Praha panel -->
@@ -370,45 +426,45 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
       <div class="pkgs-grid fade-up">
         <div class="pkg-card">
           <div class="pkg-name">Basic</div>
-          <div class="pkg-area">byt do 50 m²</div>
+          <div class="pkg-area" data-i18n="pkg_area1">byt do 50 m²</div>
           <div class="pkg-price">1 490 <span>CZK</span></div>
           <ul class="pkg-feats">
-            <li>Standardní úklid</li>
-            <li>Podlahy &amp; povrchy</li>
-            <li>Koupelna &amp; WC</li>
+            <li data-i18n="feat_standard">Standardní úklid</li>
+            <li data-i18n="feat_floors">Podlahy &amp; povrchy</li>
+            <li data-i18n="feat_bathroom">Koupelna &amp; WC</li>
           </ul>
         </div>
         <div class="pkg-card featured">
           <div class="pkg-badge" data-i18n="pkg_popular">Nejoblíbenější</div>
           <div class="pkg-name">Comfort</div>
-          <div class="pkg-area">byt 50–80 m²</div>
+          <div class="pkg-area" data-i18n="pkg_area2">byt 50–80 m²</div>
           <div class="pkg-price">2 190 <span>CZK</span></div>
           <ul class="pkg-feats">
-            <li>Vše z Basic</li>
-            <li>Kuchyň do detailu</li>
-            <li>Prach &amp; detaily</li>
-            <li>Leštění povrchů</li>
+            <li data-i18n="feat_all_basic">Vše z Basic</li>
+            <li data-i18n="feat_kitchen">Kuchyň do detailu</li>
+            <li data-i18n="feat_dust">Prach &amp; detaily</li>
+            <li data-i18n="feat_polish">Leštění povrchů</li>
           </ul>
         </div>
         <div class="pkg-card">
           <div class="pkg-name">Premium</div>
-          <div class="pkg-area">byt 80–100 m²</div>
+          <div class="pkg-area" data-i18n="pkg_area3">byt 80–100 m²</div>
           <div class="pkg-price">2 990 <span>CZK</span></div>
           <ul class="pkg-feats">
-            <li>Vše z Comfort</li>
-            <li>Hloubkový úklid</li>
-            <li>Detailní péče</li>
-            <li>Skříně &amp; zásuvky</li>
+            <li data-i18n="feat_all_comfort">Vše z Comfort</li>
+            <li data-i18n="feat_deep">Hloubkový úklid</li>
+            <li data-i18n="feat_detail_care">Detailní péče</li>
+            <li data-i18n="feat_closets">Skříně &amp; zásuvky</li>
           </ul>
         </div>
       </div>
       <div class="tbl-wrap fade-up" style="margin-top:1rem">
         <table class="price-tbl">
-          <thead><tr><th>Služba</th><th>Cena</th></tr></thead>
+          <thead><tr><th data-i18n="th_service">Služba</th><th data-i18n="th_price">Cena</th></tr></thead>
           <tbody>
-            <tr><td>Generální úklid</td><td class="pv">+40 %</td></tr>
-            <tr><td>Airbnb turnover</td><td class="pv">990 CZK</td></tr>
-            <tr><td>Po rekonstrukci</td><td class="pv">od 65 CZK/m²</td></tr>
+            <tr><td data-i18n="addsvc_general">Generální úklid</td><td class="pv">+40 %</td></tr>
+            <tr><td data-i18n="addsvc_airbnb">Airbnb turnover</td><td class="pv">990 CZK</td></tr>
+            <tr><td data-i18n="addsvc_reno">Po rekonstrukci</td><td class="pv">od 65 CZK/m²</td></tr>
           </tbody>
         </table>
       </div>
@@ -418,17 +474,17 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
     <div class="pricing-panel" id="panel-brno">
       <div class="tbl-wrap fade-up">
         <table class="price-tbl">
-          <thead><tr><th>Služba</th><th>Cena</th></tr></thead>
+          <thead><tr><th data-i18n="th_service">Služba</th><th data-i18n="th_price">Cena</th></tr></thead>
           <tbody>
-            <tr><td>Pravidelný úklid bytu 1+kk / 1+1</td><td class="pv">od 39 €</td></tr>
-            <tr><td>Pravidelný úklid bytu 2+kk / 2+1</td><td class="pv">od 49 €</td></tr>
-            <tr><td>Pravidelný úklid bytu 3+kk / 3+1</td><td class="pv">od 59 €</td></tr>
-            <tr><td>Generální úklid bytu 1+kk / 1+1</td><td class="pv">od 79 €</td></tr>
-            <tr><td>Generální úklid bytu 2+kk / 2+1</td><td class="pv">od 99 €</td></tr>
-            <tr><td>Generální úklid bytu 3+kk / 3+1</td><td class="pv">od 119 €</td></tr>
-            <tr><td>Úklid po stěhování</td><td class="pv">od 99 €</td></tr>
-            <tr><td>Mytí oken</td><td class="pv">od 25 €</td></tr>
-            <tr><td>Úklid po rekonstrukci</td><td class="pv">od 3,5 €/m²</td></tr>
+            <tr><td data-i18n="brno_svc1">Pravidelný úklid bytu 1+kk / 1+1</td><td class="pv">od 39 €</td></tr>
+            <tr><td data-i18n="brno_svc2">Pravidelný úklid bytu 2+kk / 2+1</td><td class="pv">od 49 €</td></tr>
+            <tr><td data-i18n="brno_svc3">Pravidelný úklid bytu 3+kk / 3+1</td><td class="pv">od 59 €</td></tr>
+            <tr><td data-i18n="brno_svc4">Generální úklid bytu 1+kk / 1+1</td><td class="pv">od 79 €</td></tr>
+            <tr><td data-i18n="brno_svc5">Generální úklid bytu 2+kk / 2+1</td><td class="pv">od 99 €</td></tr>
+            <tr><td data-i18n="brno_svc6">Generální úklid bytu 3+kk / 3+1</td><td class="pv">od 119 €</td></tr>
+            <tr><td data-i18n="brno_svc7">Úklid po stěhování</td><td class="pv">od 99 €</td></tr>
+            <tr><td data-i18n="brno_svc8">Mytí oken</td><td class="pv">od 25 €</td></tr>
+            <tr><td data-i18n="brno_svc9">Úklid po rekonstrukci</td><td class="pv">od 3,5 €/m²</td></tr>
           </tbody>
         </table>
       </div>
@@ -440,13 +496,13 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="calc-sec" id="calculator">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Spočítejte si cenu</span>
+      <span class="eyebrow" data-i18n="eyebrow_calc">Spočítejte si cenu</span>
       <h2 data-i18n="calc_title">Kalkulačka ceny</h2>
     </div>
     <div class="calc-card fade-up">
       <div class="calc-city-row">
-        <button class="calc-city-btn active" onclick="setCalcCity('praha')" data-i18n="tab_prague">Praha (CZK)</button>
-        <button class="calc-city-btn" onclick="setCalcCity('bratislava')" data-i18n="tab_brno">Bratislava (EUR)</button>
+        <button class="calc-city-btn active" onclick="setCalcCity('praha')" data-i18n="calc_tab_prague">Praha (CZK)</button>
+        <button class="calc-city-btn" onclick="setCalcCity('bratislava')" data-i18n="calc_tab_brno">Bratislava (EUR)</button>
       </div>
       <div class="calc-form" id="calc-form-praha">
         <div class="cf">
@@ -460,18 +516,18 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
         <div class="cf">
           <label data-i18n="calc_service">Typ úklidu</label>
           <select id="p-type" onchange="calcPrice()">
-            <option value="1">Standardní</option>
-            <option value="1.4">Generální (+40 %)</option>
-            <option value="airbnb">Airbnb turnover</option>
+            <option value="1" data-i18n="calc_type_standard">Standardní</option>
+            <option value="1.4" data-i18n="calc_type_general">Generální (+40 %)</option>
+            <option value="airbnb" data-i18n="calc_type_airbnb">Airbnb turnover</option>
           </select>
         </div>
         <div class="cf calc-addons-row">
           <label data-i18n="calc_addons">Doplňkové služby</label>
           <div class="addons-grid">
-            <label class="addon-lbl"><input type="checkbox" value="500" onchange="calcPrice()"><span>Mytí oken +500 CZK</span></label>
-            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span>Čištění lednice +300 CZK</span></label>
-            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span>Čištění trouby +300 CZK</span></label>
-            <label class="addon-lbl"><input type="checkbox" value="200" onchange="calcPrice()"><span>Balkon +200 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="500" onchange="calcPrice()"><span data-i18n="addon_windows_cz">Mytí oken +500 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span data-i18n="addon_fridge_cz">Čištění lednice +300 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="300" onchange="calcPrice()"><span data-i18n="addon_oven_cz">Čištění trouby +300 CZK</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="200" onchange="calcPrice()"><span data-i18n="addon_balcony_cz">Balkon +200 CZK</span></label>
           </div>
         </div>
       </div>
@@ -487,17 +543,17 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
         <div class="cf">
           <label data-i18n="calc_service">Typ úklidu</label>
           <select id="b-type" onchange="calcPriceBrno()">
-            <option value="1">Pravidelný</option>
-            <option value="deep">Generální</option>
-            <option value="move">Po stěhování (99 €)</option>
+            <option value="1" data-i18n="calc_type_regular">Pravidelný</option>
+            <option value="deep" data-i18n="calc_type_deep">Generální</option>
+            <option value="move" data-i18n="calc_type_move">Po stěhování (99 €)</option>
           </select>
         </div>
         <div class="cf calc-addons-row">
           <label data-i18n="calc_addons">Doplňkové služby</label>
           <div class="addons-grid">
-            <label class="addon-lbl"><input type="checkbox" value="25" onchange="calcPriceBrno()"><span>Mytí oken +25 €</span></label>
-            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span>Čištění lednice +15 €</span></label>
-            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span>Čištění trouby +15 €</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="25" onchange="calcPriceBrno()"><span data-i18n="addon_windows_eu">Mytí oken +25 €</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span data-i18n="addon_fridge_eu">Čištění lednice +15 €</span></label>
+            <label class="addon-lbl"><input type="checkbox" value="15" onchange="calcPriceBrno()"><span data-i18n="addon_oven_eu">Čištění trouby +15 €</span></label>
           </div>
         </div>
       </div>
@@ -514,7 +570,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="how-sec" id="how">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Náš proces</span>
+      <span class="eyebrow" data-i18n="eyebrow_how">Náš proces</span>
       <h2 data-i18n="section_how">Jak pracujeme</h2>
     </div>
     <div class="timeline fade-up">
@@ -530,16 +586,16 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <!-- BEFORE / AFTER -->
 <section class="ba-sec" id="before-after">
   <div class="sec-header fade-up" style="margin-bottom:2.5rem">
-    <span class="eyebrow">Výsledky práce</span>
-    <h2>Před &amp; Po</h2>
+    <span class="eyebrow" data-i18n="eyebrow_ba">Výsledky práce</span>
+    <h2 data-i18n="ba_title">Před &amp; Po</h2>
   </div>
   <div class="ba-wrap fade-up">
     <div class="ba-container" id="ba">
       <div class="ba-before">
-        <span class="ba-label ba-label-before">Před</span>
+        <span class="ba-label ba-label-before" data-i18n="ba_before">Před</span>
       </div>
       <div class="ba-after" id="ba-after">
-        <span class="ba-label ba-label-after">Po</span>
+        <span class="ba-label ba-label-after" data-i18n="ba_after">Po</span>
       </div>
       <div class="ba-divider" id="ba-divider">
         <div class="ba-handle">
@@ -556,7 +612,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="why-sec" id="why">
   <div class="why-grid">
     <div class="fade-up">
-      <span class="eyebrow">Proč si nás vybrat</span>
+      <span class="eyebrow" data-i18n="eyebrow_why">Proč si nás vybrat</span>
       <h2 data-i18n="section_why">Proč Luminous</h2>
       <ul class="why-list">
         <li><div class="w-check"></div><span data-i18n="why1">Prověření a školení profesionálové</span></li>
@@ -566,8 +622,8 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
         <li><div class="w-check"></div><span data-i18n="why5">Péče podle standardů prémiových domácností</span></li>
       </ul>
     </div>
-    <div class="fade-up">
-      <span class="eyebrow">Naše závazky</span>
+    <div class="fade-up" id="guarantees">
+      <span class="eyebrow" data-i18n="eyebrow_guarantees">Naše závazky</span>
       <h2 data-i18n="section_guarantees">Naše garance</h2>
       <div class="guarantees">
         <div class="g-card"><h4 data-i18n="g1_title">Přijedeme včas</h4><p data-i18n="g1_desc">Pokud se opozdíme — okamžitá sleva bez nutnosti reklamace.</p></div>
@@ -581,31 +637,30 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="mem-sec" id="membership">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Pravidelná péče</span>
+      <span class="eyebrow" data-i18n="eyebrow_membership">Pravidelná péče</span>
       <h2 data-i18n="section_membership">Členství</h2>
     </div>
     <div class="mem-grid fade-up">
       <div class="mem-card">
         <div class="mem-tier" data-i18n="mem_silver">Silver</div>
-        <div class="mem-price">99 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-price"><span data-i18n="mem_silver_amt">3 980</span> <sub><span data-i18n="currency">CZK</span><span data-i18n="mem_per_month"> / měsíc</span></sub></div>
         <div class="mem-desc"><span data-i18n="mem_clean2">2</span> <span data-i18n="mem_cleanings">úklidy / měsíc</span></div>
         <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
       </div>
       <div class="mem-card featured">
         <div class="mem-badge" data-i18n="pkg_popular">Nejoblíbenější</div>
         <div class="mem-tier" data-i18n="mem_gold">Gold</div>
-        <div class="mem-price">189 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-price"><span data-i18n="mem_gold_amt">6 990</span> <sub><span data-i18n="currency">CZK</span><span data-i18n="mem_per_month"> / měsíc</span></sub></div>
         <div class="mem-desc"><span data-i18n="mem_clean4">4</span> <span data-i18n="mem_cleanings">úklidy / měsíc</span></div>
         <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
       </div>
       <div class="mem-card">
         <div class="mem-tier" data-i18n="mem_platinum">Platinum</div>
-        <div class="mem-price">299 <sub>€<span data-i18n="mem_per_month"> / měsíc</span></sub></div>
+        <div class="mem-price"><span data-i18n="mem_platinum_amt">8 990</span> <sub><span data-i18n="currency">CZK</span><span data-i18n="mem_per_month"> / měsíc</span></sub></div>
         <div class="mem-desc">4 <span data-i18n="mem_cleanings">úklidy / měsíc</span> <br><span data-i18n="mem_addons">+ doplňkové služby</span></div>
         <button class="mem-btn" data-i18n="mem_choose">Vybrat plán</button>
       </div>
     </div>
-    <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--muted)" data-i18n="mem_monthly_note">Home Care Monthly Praha: 4 úklidy za 6 990 CZK (místo 4 × 2 190 CZK)</p>
   </div>
 </section>
 
@@ -613,7 +668,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <section class="reviews-sec" id="reviews">
   <div class="sec-inner">
     <div class="sec-header fade-up">
-      <span class="eyebrow">Reference</span>
+      <span class="eyebrow" data-i18n="eyebrow_reviews">Reference</span>
       <h2 data-i18n="section_reviews">Co říkají naši klienti</h2>
     </div>
     <div class="rev-grid fade-up">
@@ -639,7 +694,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <!-- CONTACT -->
 <section class="contact-sec" id="contact">
   <div class="sec-header fade-up sec-inner" style="margin-bottom:3rem">
-    <span class="eyebrow">Spojte se s námi</span>
+    <span class="eyebrow" data-i18n="eyebrow_contact">Spojte se s námi</span>
     <h2 data-i18n="section_contact">Kontakt</h2>
   </div>
   <div class="contact-grid">
@@ -662,19 +717,19 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
     </div>
     <div class="fade-up">
       <form class="contact-form" onsubmit="submitForm(event)">
-        <div class="ff"><label data-i18n="form_name">Jméno</label><input type="text" required placeholder="Vaše jméno"></div>
-        <div class="ff"><label data-i18n="form_email">E-mail</label><input type="email" required placeholder="vas@email.cz"></div>
+        <div class="ff"><label data-i18n="form_name">Jméno</label><input type="text" required placeholder="Vaše jméno" data-i18n-placeholder="form_name_ph"></div>
+        <div class="ff"><label data-i18n="form_email">E-mail</label><input type="email" required placeholder="vas@email.cz" data-i18n-placeholder="form_email_ph"></div>
         <div class="ff">
           <label data-i18n="form_service">Služba</label>
           <select>
-            <option>Premium Home Cleaning</option>
-            <option>Deep Cleaning</option>
-            <option>Airbnb Property Care</option>
-            <option>Office Premium Care</option>
-            <option>After Renovation Cleaning</option>
+            <option data-i18n="svc1_name">Premium Home Cleaning</option>
+            <option data-i18n="svc2_name">Deep Cleaning</option>
+            <option data-i18n="svc3_name">Airbnb Property Care</option>
+            <option data-i18n="svc4_name">Office Premium Care</option>
+            <option data-i18n="svc5_name">After Renovation Cleaning</option>
           </select>
         </div>
-        <div class="ff"><label data-i18n="form_msg">Zpráva</label><textarea placeholder="Popište prostor a vaše požadavky..."></textarea></div>
+        <div class="ff"><label data-i18n="form_msg">Zpráva</label><textarea placeholder="Popište prostor a vaše požadavky..." data-i18n-placeholder="form_msg_ph"></textarea></div>
         <button type="submit" class="btn-primary" style="justify-content:center" data-i18n="form_send">Odeslat poptávku</button>
       </form>
     </div>
@@ -693,11 +748,11 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 <script>
 // ── TRANSLATIONS ──
 const T = {
-  cs:{nav_services:'Služby',nav_pricing:'Ceník',nav_membership:'Členství',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ ÚKLIDOVÝ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Přijďte domů do <em>dokonale čistého</em> prostoru',hero_sub:'Profesionální tým, přesné ceny, garance spokojenosti.',btn_book:'Objednat úklid',btn_custom:'Poptat individuální péči',stats_clients:'spokojených klientů',stats_cities:'města',stats_years:'let zkušeností',stats_guarantee:'garance spokojenosti',section_services:'Naše služby',section_pricing:'Ceník',section_how:'Jak pracujeme',section_why:'Proč Luminous',section_guarantees:'Naše garance',section_membership:'Členství',section_reviews:'Co říkají naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná péče o váš domov s maximální precizností.',svc2_name:'Deep Cleaning',svc2_desc:'Hloubkové čištění každého prostoru do posledního detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletní servis krátkodobých pronájmů včetně fotodokumentace.',svc4_name:'Office Premium Care',svc4_desc:'Profesionální úklid kanceláří a obchodních prostor.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá příprava prostoru po rekonstrukci.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výměra bytu',calc_service:'Typ úklidu',calc_addons:'Doplňkové služby',calc_result:'Orientační cena',calc_note:'Uvedené ceny jsou orientační. Konečná cena závisí na stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberete službu a termín online nebo telefonicky.',how_step2:'Příprava návštěvy',how_desc2:'Přizpůsobíme péči konkrétním potřebám vašeho prostoru.',how_step3:'Profesionální úklid',how_desc3:'Náš prověřený tým provede kompletní servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail projde naší interní kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je připraven. Pošleme fotodokumentaci.',g1_title:'Přijedeme včas',g1_desc:'Pokud se opozdíme — okamžitá sleva bez nutnosti reklamace.',g2_title:'Garance spokojenosti',g2_desc:'Pokud klient není spokojený — úklid zopakujeme zdarma.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / měsíc',mem_cleanings:'úklidy / měsíc',mem_addons:'+ doplňkové služby',mem_choose:'Vybrat plán',mem_monthly_note:'Home Care Monthly Praha: 4 úklidy za 6 990 CZK (místo 4 × 2 190 CZK)',why1:'Prověření a školení profesionálové',why2:'Kontrola kvality každého úklidu',why3:'Transparentní pevné ceny',why4:'Spolehlivost a diskrétnost',why5:'Péče podle standardů prémiových domácností',ba_note:'Přetáhněte posuvník · Nahraďte obrázky vlastními fotografiemi.',pkg_popular:'Nejoblíbenější',contact_intro:'Rádi vám připravíme nezávaznou cenovou nabídku přesně na míru.',contact_phone:'Telefon',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Jméno',form_email:'E-mail',form_service:'Služba',form_msg:'Zpráva',form_send:'Odeslat poptávku',footer_copy:'Všechna práva vyhrazena.'},
-  en:{nav_services:'Services',nav_pricing:'Pricing',nav_membership:'Membership',nav_contact:'Contact',hero_eyebrow:'PREMIUM CLEANING SERVICE · PRAGUE & BRATISLAVA',hero_h1:'Come home to a <em>perfectly clean</em> space',hero_sub:'Professional team, clear pricing, satisfaction guaranteed.',btn_book:'Book a Cleaning',btn_custom:'Request Custom Care',stats_clients:'happy clients',stats_cities:'cities',stats_years:'years experience',stats_guarantee:'satisfaction guarantee',section_services:'Our Services',section_pricing:'Pricing',section_how:'How We Work',section_why:'Why Luminous',section_guarantees:'Our Guarantees',section_membership:'Membership',section_reviews:'What Our Clients Say',section_contact:'Contact',svc1_name:'Premium Home Cleaning',svc1_desc:'Regular care for your home with maximum precision.',svc2_name:'Deep Cleaning',svc2_desc:'Thorough cleaning of every space down to the last detail.',svc3_name:'Airbnb Property Care',svc3_desc:'Complete short-term rental service including photo documentation.',svc4_name:'Office Premium Care',svc4_desc:'Professional cleaning of offices and commercial spaces.',svc5_name:'After Renovation Cleaning',svc5_desc:'Perfect preparation of the space after renovation.',tab_prague:'Prague',tab_brno:'Bratislava',calc_title:'Price Calculator',calc_area:'Apartment size',calc_service:'Service type',calc_addons:'Additional services',calc_result:'Estimated price',calc_note:'Prices are indicative. Final price depends on the condition and requirements.',how_step1:'Booking',how_desc1:'Choose your service and time slot online or by phone.',how_step2:'Preparation',how_desc2:"We tailor our care to your space's specific needs.",how_step3:'Professional Cleaning',how_desc3:'Our verified team carries out the complete service.',how_step4:'Quality Check',how_desc4:'Every detail goes through our internal quality check.',how_step5:'Done',how_desc5:"Your home is ready. We'll send photo documentation.",g1_title:'On Time, Every Time',g1_desc:"If we're late, you get a discount — no questions asked.",g2_title:'Satisfaction Guarantee',g2_desc:"Not satisfied? We'll re-clean for free.",mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / month',mem_cleanings:'cleanings / month',mem_addons:'+ additional services',mem_choose:'Choose Plan',mem_monthly_note:'Home Care Monthly Prague: 4 cleanings for 6,990 CZK (instead of 4 × 2,190 CZK)',why1:'Vetted and trained professionals',why2:'Quality check on every cleaning',why3:'Transparent fixed pricing',why4:'Reliability and discretion',why5:'Care to premium household standards',ba_note:'Drag the slider · Replace with your own before/after photos.',pkg_popular:'Most Popular',contact_intro:'We will gladly prepare a no-obligation quote tailored to your space.',contact_phone:'Phone',contact_wa:'WhatsApp',contact_email:'Email',form_name:'Name',form_email:'Email',form_service:'Service',form_msg:'Message',form_send:'Send Enquiry',footer_copy:'All rights reserved.'},
-  sk:{nav_services:'Služby',nav_pricing:'Cenník',nav_membership:'Členstvo',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ UPRATOVACÍ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Príďte domov do <em>dokonale čistého</em> priestoru',hero_sub:'Profesionálny tím, jasné ceny, garancia spokojnosti.',btn_book:'Objednať upratovanie',btn_custom:'Dopytovať individuálnu starostlivosť',stats_clients:'spokojných klientov',stats_cities:'mestá',stats_years:'rokov skúseností',stats_guarantee:'garancia spokojnosti',section_services:'Naše služby',section_pricing:'Cenník',section_how:'Ako pracujeme',section_why:'Prečo Luminous',section_guarantees:'Naše garancie',section_membership:'Členstvo',section_reviews:'Čo hovoria naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná starostlivosť o váš domov s maximálnou precíznosťou.',svc2_name:'Deep Cleaning',svc2_desc:'Hĺbkové čistenie každého priestoru do posledného detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletný servis krátkodobých prenájmov vrátane fotodokumentácie.',svc4_name:'Office Premium Care',svc4_desc:'Profesionálne upratovanie kancelárií a obchodných priestorov.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá príprava priestoru po rekonštrukcii.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výmera bytu',calc_service:'Typ upratovania',calc_addons:'Doplnkové služby',calc_result:'Orientačná cena',calc_note:'Ceny sú orientačné. Konečná cena závisí od stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberiete službu a termín online alebo telefonicky.',how_step2:'Príprava návštevy',how_desc2:'Prispôsobíme starostlivosť konkrétnym potrebám vášho priestoru.',how_step3:'Profesionálne upratovanie',how_desc3:'Náš overený tím vykoná kompletný servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail prejde našou internou kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je pripravený. Pošleme fotodokumentáciu.',g1_title:'Prídem včas',g1_desc:'Ak sa oneskoríme — okamžitá zľava bez reklamácie.',g2_title:'Garancia spokojnosti',g2_desc:'Ak nie ste spokojní, upratujeme znovu zadarmo.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / mesiac',mem_cleanings:'upratovania / mesiac',mem_addons:'+ doplnkové služby',mem_choose:'Vybrať plán',mem_monthly_note:'Home Care Monthly Praha: 4 upratovania za 6 990 CZK',why1:'Overení a vyškolení profesionáli',why2:'Kontrola kvality každého upratovania',why3:'Transparentné pevné ceny',why4:'Spoľahlivosť a diskrétnosť',why5:'Starostlivosť podľa štandardov prémiových domácností',ba_note:'Potiahnite posuvník · Nahraďte vlastnými fotografiami.',pkg_popular:'Najobľúbenejší',contact_intro:'Radi vám pripravíme nezáväznú cenovú ponuku.',contact_phone:'Telefón',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Meno',form_email:'E-mail',form_service:'Služba',form_msg:'Správa',form_send:'Odoslať dopyt',footer_copy:'Všetky práva vyhradené.'},
-  uk:{nav_services:'Послуги',nav_pricing:'Ціни',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМІАЛЬНИЙ СЕРВІС ПРИБИРАННЯ · ПРАГА & БРАТИСЛАВА',hero_h1:'Повертайтеся додому в <em>ідеально чистий</em> простір',hero_sub:'Професійна команда, прозорі ціни, гарантія задоволеності.',btn_book:'Замовити прибирання',btn_custom:'Запросити індивідуальний догляд',stats_clients:'задоволених клієнтів',stats_cities:'міста',stats_years:'роки досвіду',stats_guarantee:'гарантія якості',section_services:'Наші послуги',section_pricing:'Ціни',section_how:'Як ми працюємо',section_why:'Чому Luminous',section_guarantees:'Наші гарантії',section_membership:'Членство',section_reviews:'Що кажуть наші клієнти',section_contact:'Контакт',svc1_name:'Преміальне прибирання',svc1_desc:'Регулярний догляд за вашим будинком з максимальною точністю.',svc2_name:'Глибоке прибирання',svc2_desc:'Детальне очищення кожного простору до останньої деталі.',svc3_name:'Догляд за Airbnb',svc3_desc:'Повний сервіс короткострокової оренди з фотодокументацією.',svc4_name:'Офісне прибирання',svc4_desc:'Професійне прибирання офісів і комерційних приміщень.',svc5_name:'Прибирання після ремонту',svc5_desc:'Ідеальна підготовка приміщення після ремонту.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор ціни',calc_area:'Площа квартири',calc_service:'Тип прибирання',calc_addons:'Додаткові послуги',calc_result:'Орієнтовна ціна',calc_note:'Ціни орієнтовні. Кінцева ціна залежить від стану.',how_step1:'Замовлення',how_desc1:'Оберіть послугу та час онлайн або по телефону.',how_step2:'Підготовка',how_desc2:'Адаптуємо догляд до конкретних потреб.',how_step3:'Професійне прибирання',how_desc3:'Наша перевірена команда виконує повний сервіс.',how_step4:'Контроль якості',how_desc4:'Кожна деталь проходить внутрішній контроль.',how_step5:'Готово',how_desc5:'Ваш будинок готовий. Надішлемо фотодокументацію.',g1_title:'Завжди вчасно',g1_desc:'Якщо запізнимося — знижка без запитань.',g2_title:'Гарантія задоволеності',g2_desc:'Не задоволені? Прибираємо повторно безкоштовно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / місяць',mem_cleanings:'прибирання / місяць',mem_addons:'+ додаткові послуги',mem_choose:'Обрати план',mem_monthly_note:'',why1:'Перевірені та навчені професіонали',why2:'Контроль якості кожного прибирання',why3:'Прозорі фіксовані ціни',why4:'Надійність і дискретність',why5:'Догляд за стандартами преміальних домівок',ba_note:'Перетягніть повзунок · Замініть власними фото.',pkg_popular:'Найпопулярніший',contact_intro:'Ми підготуємо безкоштовну пропозицію для вашого простору.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:"Ім'я",form_email:'E-mail',form_service:'Послуга',form_msg:'Повідомлення',form_send:'Надіслати запит',footer_copy:'Всі права захищені.'},
-  ru:{nav_services:'Услуги',nav_pricing:'Цены',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМИАЛЬНЫЙ КЛИНИНГ · ПРАГА & БРАТИСЛАВА',hero_h1:'Возвращайтесь домой в <em>идеально чистое</em> пространство',hero_sub:'Профессиональная команда, прозрачные цены, гарантия качества.',btn_book:'Заказать уборку',btn_custom:'Запросить индивидуальный уход',stats_clients:'довольных клиентов',stats_cities:'города',stats_years:'лет опыта',stats_guarantee:'гарантия качества',section_services:'Наши услуги',section_pricing:'Цены',section_how:'Как мы работаем',section_why:'Почему Luminous',section_guarantees:'Наши гарантии',section_membership:'Членство',section_reviews:'Что говорят клиенты',section_contact:'Контакт',svc1_name:'Премиальная уборка дома',svc1_desc:'Регулярный уход за вашим домом с максимальной точностью.',svc2_name:'Генеральная уборка',svc2_desc:'Глубокая чистка каждого пространства до мельчайших деталей.',svc3_name:'Обслуживание Airbnb',svc3_desc:'Полный сервис краткосрочной аренды включая фотодокументацию.',svc4_name:'Офисная уборка',svc4_desc:'Профессиональная уборка офисов и коммерческих помещений.',svc5_name:'Уборка после ремонта',svc5_desc:'Идеальная подготовка помещения после ремонта.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор цены',calc_area:'Площадь квартиры',calc_service:'Тип уборки',calc_addons:'Дополнительные услуги',calc_result:'Ориентировочная цена',calc_note:'Итоговая цена зависит от состояния и индивидуальных требований.',how_step1:'Заявка',how_desc1:'Выберите услугу и время онлайн или по телефону.',how_step2:'Подготовка',how_desc2:'Адаптируем уход под конкретные нужды вашего пространства.',how_step3:'Профессиональная уборка',how_desc3:'Наша проверенная команда выполняет полный сервис.',how_step4:'Контроль качества',how_desc4:'Каждая деталь проходит внутренний контроль качества.',how_step5:'Готово',how_desc5:'Ваш дом готов. Отправим фотодокументацию.',g1_title:'Всегда вовремя',g1_desc:'Если опоздаем — скидка без лишних слов.',g2_title:'Гарантия удовлетворённости',g2_desc:'Недовольны? Уберём повторно бесплатно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / месяц',mem_cleanings:'уборки / месяц',mem_addons:'+ дополнительные услуги',mem_choose:'Выбрать план',mem_monthly_note:'',why1:'Проверенные и обученные профессионалы',why2:'Контроль качества каждой уборки',why3:'Прозрачные фиксированные цены',why4:'Надёжность и дискретность',why5:'Уход по стандартам премиальных домов',ba_note:'Перетащите ползунок · Замените собственными фото.',pkg_popular:'Популярный',contact_intro:'Мы подготовим бесплатное предложение для вашего пространства.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'Эл. почта',form_name:'Имя',form_email:'Эл. почта',form_service:'Услуга',form_msg:'Сообщение',form_send:'Отправить запрос',footer_copy:'Все права защищены.'}
+  cs:{nav_services:'Služby',nav_pricing:'Ceník',nav_membership:'Členství',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ ÚKLIDOVÝ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Přijďte domů do <em>dokonale čistého</em> prostoru',hero_sub:'Profesionální tým, přesné ceny, garance spokojenosti.',btn_book:'Objednat úklid',btn_custom:'Poptat individuální péči',stats_clients:'spokojených klientů',stats_cities:'města',stats_years:'let zkušeností',stats_guarantee:'garance spokojenosti',section_services:'Naše služby',section_pricing:'Ceník',section_how:'Jak pracujeme',section_why:'Proč Luminous',section_guarantees:'Naše garance',section_membership:'Členství',section_reviews:'Co říkají naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná péče o váš domov s maximální precizností.',svc2_name:'Deep Cleaning',svc2_desc:'Hloubkové čištění každého prostoru do posledního detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletní servis krátkodobých pronájmů včetně fotodokumentace.',svc4_name:'Office Premium Care',svc4_desc:'Profesionální úklid kanceláří a obchodních prostor.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá příprava prostoru po rekonstrukci.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výměra bytu',calc_service:'Typ úklidu',calc_addons:'Doplňkové služby',calc_result:'Orientační cena',calc_note:'Uvedené ceny jsou orientační. Konečná cena závisí na stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberete službu a termín online nebo telefonicky.',how_step2:'Příprava návštěvy',how_desc2:'Přizpůsobíme péči konkrétním potřebám vašeho prostoru.',how_step3:'Profesionální úklid',how_desc3:'Náš prověřený tým provede kompletní servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail projde naší interní kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je připraven. Pošleme fotodokumentaci.',g1_title:'Přijedeme včas',g1_desc:'Pokud se opozdíme — okamžitá sleva bez nutnosti reklamace.',g2_title:'Garance spokojenosti',g2_desc:'Pokud klient není spokojený — úklid zopakujeme zdarma.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / měsíc',mem_cleanings:'úklidy / měsíc',mem_addons:'+ doplňkové služby',mem_choose:'Vybrat plán',currency:'CZK',mem_silver_amt:'3 980',mem_gold_amt:'6 990',mem_platinum_amt:'8 990',why1:'Prověření a školení profesionálové',why2:'Kontrola kvality každého úklidu',why3:'Transparentní pevné ceny',why4:'Spolehlivost a diskrétnost',why5:'Péče podle standardů prémiových domácností',ba_note:'Přetáhněte posuvník · Nahraďte obrázky vlastními fotografiemi.',pkg_popular:'Nejoblíbenější',contact_intro:'Rádi vám připravíme nezávaznou cenovou nabídku přesně na míru.',contact_phone:'Telefon',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Jméno',form_email:'E-mail',form_service:'Služba',form_msg:'Zpráva',form_send:'Odeslat poptávku',footer_copy:'Všechna práva vyhrazena.',eyebrow_services:'Co nabízíme',eyebrow_pricing:'Transparentní ceny',eyebrow_calc:'Spočítejte si cenu',eyebrow_how:'Náš proces',eyebrow_ba:'Výsledky práce',eyebrow_why:'Proč si nás vybrat',eyebrow_guarantees:'Naše závazky',eyebrow_membership:'Pravidelná péče',eyebrow_reviews:'Reference',eyebrow_contact:'Spojte se s námi',ba_title:'Před & Po',ba_before:'Před',ba_after:'Po',th_service:'Služba',th_price:'Cena',addsvc_general:'Generální úklid',addsvc_airbnb:'Airbnb turnover',addsvc_reno:'Po rekonstrukci',brno_svc1:'Pravidelný úklid bytu 1+kk / 1+1',brno_svc2:'Pravidelný úklid bytu 2+kk / 2+1',brno_svc3:'Pravidelný úklid bytu 3+kk / 3+1',brno_svc4:'Generální úklid bytu 1+kk / 1+1',brno_svc5:'Generální úklid bytu 2+kk / 2+1',brno_svc6:'Generální úklid bytu 3+kk / 3+1',brno_svc7:'Úklid po stěhování',brno_svc8:'Mytí oken',brno_svc9:'Úklid po rekonstrukci',pkg_area1:'byt do 50 m²',pkg_area2:'byt 50–80 m²',pkg_area3:'byt 80–100 m²',feat_standard:'Standardní úklid',feat_floors:'Podlahy & povrchy',feat_bathroom:'Koupelna & WC',feat_all_basic:'Vše z Basic',feat_kitchen:'Kuchyň do detailu',feat_dust:'Prach & detaily',feat_polish:'Leštění povrchů',feat_all_comfort:'Vše z Comfort',feat_deep:'Hloubkový úklid',feat_detail_care:'Detailní péče',feat_closets:'Skříně & zásuvky',calc_type_standard:'Standardní',calc_type_general:'Generální (+40 %)',calc_type_airbnb:'Airbnb turnover',calc_type_regular:'Pravidelný',calc_type_deep:'Generální',calc_type_move:'Po stěhování (99 €)',addon_windows_cz:'Mytí oken +500 CZK',addon_fridge_cz:'Čištění lednice +300 CZK',addon_oven_cz:'Čištění trouby +300 CZK',addon_balcony_cz:'Balkon +200 CZK',addon_windows_eu:'Mytí oken +25 €',addon_fridge_eu:'Čištění lednice +15 €',addon_oven_eu:'Čištění trouby +15 €',calc_tab_prague:'Praha (CZK)',calc_tab_brno:'Bratislava (EUR)',form_name_ph:'Vaše jméno',form_email_ph:'vas@email.cz',form_msg_ph:'Popište prostor a vaše požadavky...',mem_clean2:'2',mem_clean4:'4'},
+  en:{nav_services:'Services',nav_pricing:'Pricing',nav_membership:'Membership',nav_contact:'Contact',hero_eyebrow:'PREMIUM CLEANING SERVICE · PRAGUE & BRATISLAVA',hero_h1:'Come home to a <em>perfectly clean</em> space',hero_sub:'Professional team, clear pricing, satisfaction guaranteed.',btn_book:'Book a Cleaning',btn_custom:'Request Custom Care',stats_clients:'happy clients',stats_cities:'cities',stats_years:'years experience',stats_guarantee:'satisfaction guarantee',section_services:'Our Services',section_pricing:'Pricing',section_how:'How We Work',section_why:'Why Luminous',section_guarantees:'Our Guarantees',section_membership:'Membership',section_reviews:'What Our Clients Say',section_contact:'Contact',svc1_name:'Premium Home Cleaning',svc1_desc:'Regular care for your home with maximum precision.',svc2_name:'Deep Cleaning',svc2_desc:'Thorough cleaning of every space down to the last detail.',svc3_name:'Airbnb Property Care',svc3_desc:'Complete short-term rental service including photo documentation.',svc4_name:'Office Premium Care',svc4_desc:'Professional cleaning of offices and commercial spaces.',svc5_name:'After Renovation Cleaning',svc5_desc:'Perfect preparation of the space after renovation.',tab_prague:'Prague',tab_brno:'Bratislava',calc_title:'Price Calculator',calc_area:'Apartment size',calc_service:'Service type',calc_addons:'Additional services',calc_result:'Estimated price',calc_note:'Prices are indicative. Final price depends on the condition and requirements.',how_step1:'Booking',how_desc1:'Choose your service and time slot online or by phone.',how_step2:'Preparation',how_desc2:"We tailor our care to your space's specific needs.",how_step3:'Professional Cleaning',how_desc3:'Our verified team carries out the complete service.',how_step4:'Quality Check',how_desc4:'Every detail goes through our internal quality check.',how_step5:'Done',how_desc5:"Your home is ready. We'll send photo documentation.",g1_title:'On Time, Every Time',g1_desc:"If we're late, you get a discount — no questions asked.",g2_title:'Satisfaction Guarantee',g2_desc:"Not satisfied? We'll re-clean for free.",mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / month',mem_cleanings:'cleanings / month',mem_addons:'+ additional services',mem_choose:'Choose Plan',currency:'€',mem_silver_amt:'99',mem_gold_amt:'189',mem_platinum_amt:'299',why1:'Vetted and trained professionals',why2:'Quality check on every cleaning',why3:'Transparent fixed pricing',why4:'Reliability and discretion',why5:'Care to premium household standards',ba_note:'Drag the slider · Replace with your own before/after photos.',pkg_popular:'Most Popular',contact_intro:'We will gladly prepare a no-obligation quote tailored to your space.',contact_phone:'Phone',contact_wa:'WhatsApp',contact_email:'Email',form_name:'Name',form_email:'Email',form_service:'Service',form_msg:'Message',form_send:'Send Enquiry',footer_copy:'All rights reserved.',eyebrow_services:'What We Offer',eyebrow_pricing:'Transparent Pricing',eyebrow_calc:'Calculate Your Price',eyebrow_how:'Our Process',eyebrow_ba:'Results',eyebrow_why:'Why Choose Us',eyebrow_guarantees:'Our Commitments',eyebrow_membership:'Regular Care',eyebrow_reviews:'Testimonials',eyebrow_contact:'Get In Touch',ba_title:'Before & After',ba_before:'Before',ba_after:'After',th_service:'Service',th_price:'Price',addsvc_general:'General Cleaning',addsvc_airbnb:'Airbnb Turnover',addsvc_reno:'After Renovation',brno_svc1:'Regular cleaning, 1-room apartment',brno_svc2:'Regular cleaning, 2-room apartment',brno_svc3:'Regular cleaning, 3-room apartment',brno_svc4:'General cleaning, 1-room apartment',brno_svc5:'General cleaning, 2-room apartment',brno_svc6:'General cleaning, 3-room apartment',brno_svc7:'Post-move cleaning',brno_svc8:'Window cleaning',brno_svc9:'After-renovation cleaning',pkg_area1:'apartment up to 50 m²',pkg_area2:'apartment 50–80 m²',pkg_area3:'apartment 80–100 m²',feat_standard:'Standard cleaning',feat_floors:'Floors & surfaces',feat_bathroom:'Bathroom & WC',feat_all_basic:'Everything in Basic',feat_kitchen:'Kitchen, in detail',feat_dust:'Dusting & detailing',feat_polish:'Surface polishing',feat_all_comfort:'Everything in Comfort',feat_deep:'Deep cleaning',feat_detail_care:'Detailed care',feat_closets:'Closets & drawers',calc_type_standard:'Standard',calc_type_general:'General (+40%)',calc_type_airbnb:'Airbnb turnover',calc_type_regular:'Regular',calc_type_deep:'General',calc_type_move:'Post-move (€99)',addon_windows_cz:'Window cleaning +500 CZK',addon_fridge_cz:'Fridge cleaning +300 CZK',addon_oven_cz:'Oven cleaning +300 CZK',addon_balcony_cz:'Balcony +200 CZK',addon_windows_eu:'Window cleaning +€25',addon_fridge_eu:'Fridge cleaning +€15',addon_oven_eu:'Oven cleaning +€15',calc_tab_prague:'Prague (CZK)',calc_tab_brno:'Bratislava (EUR)',form_name_ph:'Your name',form_email_ph:'you@email.com',form_msg_ph:'Describe your space and requirements...',mem_clean2:'2',mem_clean4:'4'},
+  sk:{nav_services:'Služby',nav_pricing:'Cenník',nav_membership:'Členstvo',nav_contact:'Kontakt',hero_eyebrow:'PRÉMIOVÝ UPRATOVACÍ SERVIS · PRAHA & BRATISLAVA',hero_h1:'Príďte domov do <em>dokonale čistého</em> priestoru',hero_sub:'Profesionálny tím, jasné ceny, garancia spokojnosti.',btn_book:'Objednať upratovanie',btn_custom:'Dopytovať individuálnu starostlivosť',stats_clients:'spokojných klientov',stats_cities:'mestá',stats_years:'rokov skúseností',stats_guarantee:'garancia spokojnosti',section_services:'Naše služby',section_pricing:'Cenník',section_how:'Ako pracujeme',section_why:'Prečo Luminous',section_guarantees:'Naše garancie',section_membership:'Členstvo',section_reviews:'Čo hovoria naši klienti',section_contact:'Kontakt',svc1_name:'Premium Home Cleaning',svc1_desc:'Pravidelná starostlivosť o váš domov s maximálnou precíznosťou.',svc2_name:'Deep Cleaning',svc2_desc:'Hĺbkové čistenie každého priestoru do posledného detailu.',svc3_name:'Airbnb Property Care',svc3_desc:'Kompletný servis krátkodobých prenájmov vrátane fotodokumentácie.',svc4_name:'Office Premium Care',svc4_desc:'Profesionálne upratovanie kancelárií a obchodných priestorov.',svc5_name:'After Renovation Cleaning',svc5_desc:'Dokonalá príprava priestoru po rekonštrukcii.',tab_prague:'Praha',tab_brno:'Bratislava',calc_title:'Kalkulačka ceny',calc_area:'Výmera bytu',calc_service:'Typ upratovania',calc_addons:'Doplnkové služby',calc_result:'Orientačná cena',calc_note:'Ceny sú orientačné. Konečná cena závisí od stavu bytu.',how_step1:'Objednávka',how_desc1:'Vyberiete službu a termín online alebo telefonicky.',how_step2:'Príprava návštevy',how_desc2:'Prispôsobíme starostlivosť konkrétnym potrebám vášho priestoru.',how_step3:'Profesionálne upratovanie',how_desc3:'Náš overený tím vykoná kompletný servis.',how_step4:'Kontrola kvality',how_desc4:'Každý detail prejde našou internou kontrolou kvality.',how_step5:'Hotovo',how_desc5:'Váš domov je pripravený. Pošleme fotodokumentáciu.',g1_title:'Prídem včas',g1_desc:'Ak sa oneskoríme — okamžitá zľava bez reklamácie.',g2_title:'Garancia spokojnosti',g2_desc:'Ak nie ste spokojní, upratujeme znovu zadarmo.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / mesiac',mem_cleanings:'upratovania / mesiac',mem_addons:'+ doplnkové služby',mem_choose:'Vybrať plán',currency:'€',mem_silver_amt:'99',mem_gold_amt:'189',mem_platinum_amt:'299',why1:'Overení a vyškolení profesionáli',why2:'Kontrola kvality každého upratovania',why3:'Transparentné pevné ceny',why4:'Spoľahlivosť a diskrétnosť',why5:'Starostlivosť podľa štandardov prémiových domácností',ba_note:'Potiahnite posuvník · Nahraďte vlastnými fotografiami.',pkg_popular:'Najobľúbenejší',contact_intro:'Radi vám pripravíme nezáväznú cenovú ponuku.',contact_phone:'Telefón',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:'Meno',form_email:'E-mail',form_service:'Služba',form_msg:'Správa',form_send:'Odoslať dopyt',footer_copy:'Všetky práva vyhradené.',eyebrow_services:'Čo ponúkame',eyebrow_pricing:'Transparentné ceny',eyebrow_calc:'Vypočítajte si cenu',eyebrow_how:'Náš proces',eyebrow_ba:'Výsledky práce',eyebrow_why:'Prečo si nás vybrať',eyebrow_guarantees:'Naše záväzky',eyebrow_membership:'Pravidelná starostlivosť',eyebrow_reviews:'Referencie',eyebrow_contact:'Spojte sa s nami',ba_title:'Pred & Po',ba_before:'Pred',ba_after:'Po',th_service:'Služba',th_price:'Cena',addsvc_general:'Generálne upratovanie',addsvc_airbnb:'Airbnb turnover',addsvc_reno:'Po rekonštrukcii',brno_svc1:'Pravidelné upratovanie bytu 1+kk / 1+1',brno_svc2:'Pravidelné upratovanie bytu 2+kk / 2+1',brno_svc3:'Pravidelné upratovanie bytu 3+kk / 3+1',brno_svc4:'Generálne upratovanie bytu 1+kk / 1+1',brno_svc5:'Generálne upratovanie bytu 2+kk / 2+1',brno_svc6:'Generálne upratovanie bytu 3+kk / 3+1',brno_svc7:'Upratovanie po sťahovaní',brno_svc8:'Umývanie okien',brno_svc9:'Upratovanie po rekonštrukcii',pkg_area1:'byt do 50 m²',pkg_area2:'byt 50–80 m²',pkg_area3:'byt 80–100 m²',feat_standard:'Štandardné upratovanie',feat_floors:'Podlahy & povrchy',feat_bathroom:'Kúpeľňa & WC',feat_all_basic:'Všetko z Basic',feat_kitchen:'Kuchyňa do detailu',feat_dust:'Prach & detaily',feat_polish:'Leštenie povrchov',feat_all_comfort:'Všetko z Comfort',feat_deep:'Hĺbkové upratovanie',feat_detail_care:'Detailná starostlivosť',feat_closets:'Skrine & zásuvky',calc_type_standard:'Štandardný',calc_type_general:'Generálny (+40 %)',calc_type_airbnb:'Airbnb turnover',calc_type_regular:'Pravidelný',calc_type_deep:'Generálny',calc_type_move:'Po sťahovaní (99 €)',addon_windows_cz:'Umývanie okien +500 CZK',addon_fridge_cz:'Čistenie chladničky +300 CZK',addon_oven_cz:'Čistenie rúry +300 CZK',addon_balcony_cz:'Balkón +200 CZK',addon_windows_eu:'Umývanie okien +25 €',addon_fridge_eu:'Čistenie chladničky +15 €',addon_oven_eu:'Čistenie rúry +15 €',calc_tab_prague:'Praha (CZK)',calc_tab_brno:'Bratislava (EUR)',form_name_ph:'Vaše meno',form_email_ph:'vas@email.sk',form_msg_ph:'Popíšte priestor a vaše požiadavky...',mem_clean2:'2',mem_clean4:'4'},
+  uk:{nav_services:'Послуги',nav_pricing:'Ціни',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМІАЛЬНИЙ СЕРВІС ПРИБИРАННЯ · ПРАГА & БРАТИСЛАВА',hero_h1:'Повертайтеся додому в <em>ідеально чистий</em> простір',hero_sub:'Професійна команда, прозорі ціни, гарантія задоволеності.',btn_book:'Замовити прибирання',btn_custom:'Запросити індивідуальний догляд',stats_clients:'задоволених клієнтів',stats_cities:'міста',stats_years:'роки досвіду',stats_guarantee:'гарантія якості',section_services:'Наші послуги',section_pricing:'Ціни',section_how:'Як ми працюємо',section_why:'Чому Luminous',section_guarantees:'Наші гарантії',section_membership:'Членство',section_reviews:'Що кажуть наші клієнти',section_contact:'Контакт',svc1_name:'Преміальне прибирання',svc1_desc:'Регулярний догляд за вашим будинком з максимальною точністю.',svc2_name:'Глибоке прибирання',svc2_desc:'Детальне очищення кожного простору до останньої деталі.',svc3_name:'Догляд за Airbnb',svc3_desc:'Повний сервіс короткострокової оренди з фотодокументацією.',svc4_name:'Офісне прибирання',svc4_desc:'Професійне прибирання офісів і комерційних приміщень.',svc5_name:'Прибирання після ремонту',svc5_desc:'Ідеальна підготовка приміщення після ремонту.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор ціни',calc_area:'Площа квартири',calc_service:'Тип прибирання',calc_addons:'Додаткові послуги',calc_result:'Орієнтовна ціна',calc_note:'Ціни орієнтовні. Кінцева ціна залежить від стану.',how_step1:'Замовлення',how_desc1:'Оберіть послугу та час онлайн або по телефону.',how_step2:'Підготовка',how_desc2:'Адаптуємо догляд до конкретних потреб.',how_step3:'Професійне прибирання',how_desc3:'Наша перевірена команда виконує повний сервіс.',how_step4:'Контроль якості',how_desc4:'Кожна деталь проходить внутрішній контроль.',how_step5:'Готово',how_desc5:'Ваш будинок готовий. Надішлемо фотодокументацію.',g1_title:'Завжди вчасно',g1_desc:'Якщо запізнимося — знижка без запитань.',g2_title:'Гарантія задоволеності',g2_desc:'Не задоволені? Прибираємо повторно безкоштовно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / місяць',mem_cleanings:'прибирання / місяць',mem_addons:'+ додаткові послуги',mem_choose:'Обрати план',currency:'€',mem_silver_amt:'99',mem_gold_amt:'189',mem_platinum_amt:'299',why1:'Перевірені та навчені професіонали',why2:'Контроль якості кожного прибирання',why3:'Прозорі фіксовані ціни',why4:'Надійність і дискретність',why5:'Догляд за стандартами преміальних домівок',ba_note:'Перетягніть повзунок · Замініть власними фото.',pkg_popular:'Найпопулярніший',contact_intro:'Ми підготуємо безкоштовну пропозицію для вашого простору.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'E-mail',form_name:"Ім'я",form_email:'E-mail',form_service:'Послуга',form_msg:'Повідомлення',form_send:'Надіслати запит',footer_copy:'Всі права захищені.',eyebrow_services:'Що ми пропонуємо',eyebrow_pricing:'Прозорі ціни',eyebrow_calc:'Розрахуйте ціну',eyebrow_how:'Наш процес',eyebrow_ba:'Результати роботи',eyebrow_why:'Чому обирають нас',eyebrow_guarantees:'Наші зобов’язання',eyebrow_membership:'Регулярний догляд',eyebrow_reviews:'Відгуки',eyebrow_contact:'Зв’яжіться з нами',ba_title:'До & Після',ba_before:'До',ba_after:'Після',th_service:'Послуга',th_price:'Ціна',addsvc_general:'Генеральне прибирання',addsvc_airbnb:'Airbnb прибирання',addsvc_reno:'Після ремонту',brno_svc1:'Регулярне прибирання, 1-кімнатна квартира',brno_svc2:'Регулярне прибирання, 2-кімнатна квартира',brno_svc3:'Регулярне прибирання, 3-кімнатна квартира',brno_svc4:'Генеральне прибирання, 1-кімнатна квартира',brno_svc5:'Генеральне прибирання, 2-кімнатна квартира',brno_svc6:'Генеральне прибирання, 3-кімнатна квартира',brno_svc7:'Прибирання після переїзду',brno_svc8:'Миття вікон',brno_svc9:'Прибирання після ремонту',pkg_area1:'квартира до 50 м²',pkg_area2:'квартира 50–80 м²',pkg_area3:'квартира 80–100 м²',feat_standard:'Стандартне прибирання',feat_floors:'Підлоги та поверхні',feat_bathroom:'Ванна кімната та туалет',feat_all_basic:'Все з Basic',feat_kitchen:'Кухня в деталях',feat_dust:'Пил та деталі',feat_polish:'Полірування поверхонь',feat_all_comfort:'Все з Comfort',feat_deep:'Глибоке прибирання',feat_detail_care:'Детальний догляд',feat_closets:'Шафи та шухляди',calc_type_standard:'Стандартний',calc_type_general:'Генеральний (+40%)',calc_type_airbnb:'Airbnb прибирання',calc_type_regular:'Регулярний',calc_type_deep:'Генеральний',calc_type_move:'Після переїзду (99 €)',addon_windows_cz:'Миття вікон +500 CZK',addon_fridge_cz:'Чищення холодильника +300 CZK',addon_oven_cz:'Чищення духовки +300 CZK',addon_balcony_cz:'Балкон +200 CZK',addon_windows_eu:'Миття вікон +25 €',addon_fridge_eu:'Чищення холодильника +15 €',addon_oven_eu:'Чищення духовки +15 €',calc_tab_prague:'Прага (CZK)',calc_tab_brno:'Братислава (EUR)',form_name_ph:'Ваше ім’я',form_email_ph:'vas@email.com',form_msg_ph:'Опишіть простір і ваші вимоги...',mem_clean2:'2',mem_clean4:'4'},
+  ru:{nav_services:'Услуги',nav_pricing:'Цены',nav_membership:'Членство',nav_contact:'Контакт',hero_eyebrow:'ПРЕМИАЛЬНЫЙ КЛИНИНГ · ПРАГА & БРАТИСЛАВА',hero_h1:'Возвращайтесь домой в <em>идеально чистое</em> пространство',hero_sub:'Профессиональная команда, прозрачные цены, гарантия качества.',btn_book:'Заказать уборку',btn_custom:'Запросить индивидуальный уход',stats_clients:'довольных клиентов',stats_cities:'города',stats_years:'лет опыта',stats_guarantee:'гарантия качества',section_services:'Наши услуги',section_pricing:'Цены',section_how:'Как мы работаем',section_why:'Почему Luminous',section_guarantees:'Наши гарантии',section_membership:'Членство',section_reviews:'Что говорят клиенты',section_contact:'Контакт',svc1_name:'Премиальная уборка дома',svc1_desc:'Регулярный уход за вашим домом с максимальной точностью.',svc2_name:'Генеральная уборка',svc2_desc:'Глубокая чистка каждого пространства до мельчайших деталей.',svc3_name:'Обслуживание Airbnb',svc3_desc:'Полный сервис краткосрочной аренды включая фотодокументацию.',svc4_name:'Офисная уборка',svc4_desc:'Профессиональная уборка офисов и коммерческих помещений.',svc5_name:'Уборка после ремонта',svc5_desc:'Идеальная подготовка помещения после ремонта.',tab_prague:'Прага',tab_brno:'Братислава',calc_title:'Калькулятор цены',calc_area:'Площадь квартиры',calc_service:'Тип уборки',calc_addons:'Дополнительные услуги',calc_result:'Ориентировочная цена',calc_note:'Итоговая цена зависит от состояния и индивидуальных требований.',how_step1:'Заявка',how_desc1:'Выберите услугу и время онлайн или по телефону.',how_step2:'Подготовка',how_desc2:'Адаптируем уход под конкретные нужды вашего пространства.',how_step3:'Профессиональная уборка',how_desc3:'Наша проверенная команда выполняет полный сервис.',how_step4:'Контроль качества',how_desc4:'Каждая деталь проходит внутренний контроль качества.',how_step5:'Готово',how_desc5:'Ваш дом готов. Отправим фотодокументацию.',g1_title:'Всегда вовремя',g1_desc:'Если опоздаем — скидка без лишних слов.',g2_title:'Гарантия удовлетворённости',g2_desc:'Недовольны? Уберём повторно бесплатно.',mem_silver:'Silver',mem_gold:'Gold',mem_platinum:'Platinum',mem_per_month:' / месяц',mem_cleanings:'уборки / месяц',mem_addons:'+ дополнительные услуги',mem_choose:'Выбрать план',currency:'€',mem_silver_amt:'99',mem_gold_amt:'189',mem_platinum_amt:'299',why1:'Проверенные и обученные профессионалы',why2:'Контроль качества каждой уборки',why3:'Прозрачные фиксированные цены',why4:'Надёжность и дискретность',why5:'Уход по стандартам премиальных домов',ba_note:'Перетащите ползунок · Замените собственными фото.',pkg_popular:'Популярный',contact_intro:'Мы подготовим бесплатное предложение для вашего пространства.',contact_phone:'Телефон',contact_wa:'WhatsApp',contact_email:'Эл. почта',form_name:'Имя',form_email:'Эл. почта',form_service:'Услуга',form_msg:'Сообщение',form_send:'Отправить запрос',footer_copy:'Все права защищены.',eyebrow_services:'Что мы предлагаем',eyebrow_pricing:'Прозрачные цены',eyebrow_calc:'Рассчитайте цену',eyebrow_how:'Наш процесс',eyebrow_ba:'Результаты работы',eyebrow_why:'Почему выбирают нас',eyebrow_guarantees:'Наши обязательства',eyebrow_membership:'Регулярный уход',eyebrow_reviews:'Отзывы',eyebrow_contact:'Свяжитесь с нами',ba_title:'До & После',ba_before:'До',ba_after:'После',th_service:'Услуга',th_price:'Цена',addsvc_general:'Генеральная уборка',addsvc_airbnb:'Airbnb уборка',addsvc_reno:'После ремонта',brno_svc1:'Регулярная уборка, 1-комнатная квартира',brno_svc2:'Регулярная уборка, 2-комнатная квартира',brno_svc3:'Регулярная уборка, 3-комнатная квартира',brno_svc4:'Генеральная уборка, 1-комнатная квартира',brno_svc5:'Генеральная уборка, 2-комнатная квартира',brno_svc6:'Генеральная уборка, 3-комнатная квартира',brno_svc7:'Уборка после переезда',brno_svc8:'Мытьё окон',brno_svc9:'Уборка после ремонта',pkg_area1:'квартира до 50 м²',pkg_area2:'квартира 50–80 м²',pkg_area3:'квартира 80–100 м²',feat_standard:'Стандартная уборка',feat_floors:'Полы и поверхности',feat_bathroom:'Ванная и туалет',feat_all_basic:'Всё из Basic',feat_kitchen:'Кухня в деталях',feat_dust:'Пыль и детали',feat_polish:'Полировка поверхностей',feat_all_comfort:'Всё из Comfort',feat_deep:'Глубокая уборка',feat_detail_care:'Детальный уход',feat_closets:'Шкафы и ящики',calc_type_standard:'Стандартный',calc_type_general:'Генеральный (+40%)',calc_type_airbnb:'Airbnb уборка',calc_type_regular:'Регулярный',calc_type_deep:'Генеральный',calc_type_move:'После переезда (99 €)',addon_windows_cz:'Мытьё окон +500 CZK',addon_fridge_cz:'Чистка холодильника +300 CZK',addon_oven_cz:'Чистка духовки +300 CZK',addon_balcony_cz:'Балкон +200 CZK',addon_windows_eu:'Мытьё окон +25 €',addon_fridge_eu:'Чистка холодильника +15 €',addon_oven_eu:'Чистка духовки +15 €',calc_tab_prague:'Прага (CZK)',calc_tab_brno:'Братислава (EUR)',form_name_ph:'Ваше имя',form_email_ph:'vas@email.com',form_msg_ph:'Опишите пространство и ваши пожелания...',mem_clean2:'2',mem_clean4:'4'}
 };
 
 let currentLang = 'cs';
@@ -714,6 +769,10 @@ function setLang(lang) {
     const k = el.getAttribute('data-i18n-html');
     if (t[k] !== undefined) el.innerHTML = t[k];
   });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-i18n-placeholder');
+    if (t[k] !== undefined) el.placeholder = t[k];
+  });
   document.querySelectorAll('.lang-sw button').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-sw button[onclick="setLang('${lang}')"]`).classList.add('active');
   document.documentElement.lang = lang === 'uk' ? 'uk' : lang === 'ru' ? 'ru' : lang;
@@ -722,9 +781,8 @@ function setLang(lang) {
 // ── CITY TABS ──
 function switchCity(city) {
   document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + city).classList.add('active');
-  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.city-tab').forEach(t => t.classList.toggle('active', t.dataset.city === city));
 }
 
 // ── CALCULATOR ──
@@ -800,6 +858,26 @@ document.getElementById('nav-links').querySelectorAll('a').forEach(a => {
   });
 });
 
+// ── MORE MENU ──
+function toggleMoreMenu() {
+  const open = document.getElementById('more-menu').classList.toggle('open');
+  const btn = document.getElementById('more-btn');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+}
+function closeMoreMenu() {
+  document.getElementById('more-menu').classList.remove('open');
+  const btn = document.getElementById('more-btn');
+  btn.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+document.getElementById('more-menu').querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', closeMoreMenu);
+});
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.nav-more').contains(e.target)) closeMoreMenu();
+});
+
 // ── INTERSECTION OBSERVER (fade-up + counters) ──
 const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -827,6 +905,117 @@ function animateCount(el) {
   };
   requestAnimationFrame(step);
 }
+
+// ── INTRO: bee flies over, gold sprinkles fall from it and spell LUMINOUS (disabled for now — see matching CSS/HTML blocks)
+/*
+(function() {
+  const overlay = document.getElementById('intro-overlay');
+  const canvas = document.getElementById('intro-canvas');
+  const bee = document.getElementById('intro-bee-wrap');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    overlay.remove();
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = window.innerWidth, h = overlay.getBoundingClientRect().height;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  // target points: where the letters of LUMINOUS live, lower in the band
+  const word = 'LUMINOUS';
+  const fontSize = Math.min(w * 0.085, h * 0.3, 84);
+  const textY = h * 0.72;
+  const mask = document.createElement('canvas');
+  mask.width = w;
+  mask.height = h;
+  const mctx = mask.getContext('2d');
+  mctx.fillStyle = '#fff';
+  mctx.font = `400 ${fontSize}px 'Palatino Linotype', Palatino, Georgia, serif`;
+  mctx.textAlign = 'center';
+  mctx.textBaseline = 'middle';
+  mctx.fillText(word, w / 2, textY);
+  const data = mctx.getImageData(0, 0, w, h).data;
+
+  const step = Math.max(2, Math.floor(fontSize / 28));
+  const points = [];
+  for (let y = 0; y < h; y += step) {
+    for (let x = 0; x < w; x += step) {
+      if (data[(y * w + x) * 4 + 3] > 120) {
+        points.push({ x, y, r: Math.random() * 1.1 + .6, triggered: false, landed: false });
+      }
+    }
+  }
+
+  // bee flight path: steady left-to-right, irregular vertical bobbing
+  const flightMs = 2400, fallMs = 460, holdMs = 650, fadeMs = 800;
+  const baseY = h * 0.28;
+  const amp1 = 16 + Math.random() * 10, freq1 = 1.5 + Math.random() * 1, phase1 = Math.random() * Math.PI * 2;
+  const amp2 = 7 + Math.random() * 6, freq2 = 3.3 + Math.random() * 1.6, phase2 = Math.random() * Math.PI * 2;
+  const minY = h * 0.12, maxY = h * 0.58;
+
+  function beePos(t) {
+    const tc = Math.min(t, flightMs);
+    const x = (tc / flightMs) * w;
+    const tt = tc / 1000;
+    let y = baseY + amp1 * Math.sin(tt * freq1 + phase1) + amp2 * Math.sin(tt * freq2 + phase2);
+    y = Math.max(minY, Math.min(maxY, y));
+    return { x, y };
+  }
+
+  points.forEach(p => {
+    p.triggerT = Math.max(0, (p.x / w) * flightMs + (Math.random() - .5) * 120);
+  });
+
+  let start = null;
+  const totalMs = flightMs + fallMs + holdMs;
+
+  function frame(ts) {
+    if (!start) start = ts;
+    const elapsed = ts - start;
+    ctx.clearRect(0, 0, w, h);
+
+    const cur = beePos(elapsed);
+    const prev = beePos(Math.max(0, elapsed - 16));
+    const angle = Math.atan2(cur.y - prev.y, cur.x - prev.x) * 180 / Math.PI;
+    bee.style.transform = `translate(${cur.x}px,${cur.y}px) rotate(${angle + 90}deg)`;
+    bee.style.opacity = '1';
+
+    points.forEach(p => {
+      if (!p.triggered && elapsed >= p.triggerT) {
+        p.triggered = true;
+        p.startX = cur.x;
+        p.startY = cur.y;
+      }
+      if (p.triggered && !p.landed) {
+        const fp = Math.min((elapsed - p.triggerT) / fallMs, 1);
+        const ease = fp * fp;
+        p.curX = p.startX + (p.x - p.startX) * fp;
+        p.curY = p.startY + (p.y - p.startY) * ease;
+        p.alpha = Math.min(fp * 2, 1);
+        if (fp >= 1) { p.landed = true; p.curX = p.x; p.curY = p.y; p.alpha = 1; }
+      }
+      if (p.triggered) {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(201,164,74,${p.alpha})`;
+        ctx.arc(p.curX, p.curY, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    if (elapsed < totalMs) {
+      requestAnimationFrame(frame);
+    } else {
+      bee.style.opacity = '0';
+      overlay.classList.add('hide');
+      setTimeout(() => overlay.remove(), fadeMs + 50);
+    }
+  }
+  requestAnimationFrame(frame);
+})();
+*/
 
 // ── GRAIN CANVAS ──
 (function() {

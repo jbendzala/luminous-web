@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
 <title>Luminous — Prémiový úklidový servis</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -274,36 +277,9 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
-
-/* ── INTRO (disabled for now — see matching HTML/JS blocks) ──
-#intro-overlay{position:fixed;top:0;left:0;right:0;height:clamp(150px,24vh,210px);z-index:200;background:var(--deep);border-bottom:1px solid var(--border);overflow:hidden;opacity:1;transition:opacity .8s ease}
-#intro-overlay.hide{opacity:0;pointer-events:none}
-#intro-canvas{position:absolute;inset:0;display:block;width:100%;height:100%}
-#intro-bee-wrap{position:absolute;top:0;left:0;width:68px;height:57px;margin:-28.5px 0 0 -34px;color:var(--gold);filter:drop-shadow(0 0 6px rgba(166,132,45,.55));opacity:0;transition:opacity .3s ease}
-#intro-bee-wrap svg{width:100%;height:100%;display:block}
-#intro-bee-wrap .wing{transform-box:fill-box;transform-origin:50% 15%;animation:bee-flutter .14s ease-in-out infinite alternate}
-@keyframes bee-flutter{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
-*/
 </style>
-
-<!-- INTRO (disabled for now — see matching CSS/JS blocks)
-<div id="intro-overlay" aria-hidden="true">
-  <canvas id="intro-canvas"></canvas>
-  <div id="intro-bee-wrap">
-    <svg viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g class="wing"><path d="M28,18 C18,8 6,10 8,20 C10,28 22,26 28,18 Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></g>
-      <g class="wing"><path d="M32,18 C42,8 54,10 52,20 C50,28 38,26 32,18 Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></g>
-      <ellipse cx="30" cy="30" rx="9" ry="15" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M21.5,24 Q30,27 38.5,24" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      <path d="M21,31 Q30,34 39,31" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      <path d="M22,38 Q30,41 38,38" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      <circle cx="30" cy="12" r="4.2" stroke="currentColor" stroke-width="1.3"/>
-      <path d="M27,9 C25,5 22,4 20,5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-      <path d="M33,9 C35,5 38,4 40,5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-    </svg>
-  </div>
-</div>
--->
+</head>
+<body>
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -338,7 +314,7 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
       <li><a href="#reviews" data-i18n="section_reviews">Co říkají naši klienti</a></li>
     </ul>
   </div>
-  <a href="https://wa.me/420000000000" class="nav-wa" target="_blank" rel="noopener">
+  <a href="https://wa.me/420789657570" class="nav-wa" target="_blank" rel="noopener">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     WhatsApp
   </a>
@@ -706,11 +682,11 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
       <div class="contact-info">
         <div class="ci-item">
           <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg></div>
-          <div><div class="ci-label" data-i18n="contact_phone">Telefon</div><div class="ci-val"><a href="tel:+420000000000">+420 000 000 000</a></div></div>
+          <div><div class="ci-label" data-i18n="contact_phone">Telefon</div><div class="ci-val"><a href="tel:+420789657570">+420 789 657 570</a></div></div>
         </div>
         <div class="ci-item">
           <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
-          <div><div class="ci-label" data-i18n="contact_wa">WhatsApp</div><div class="ci-val"><a href="https://wa.me/420000000000" target="_blank" rel="noopener">+420 000 000 000</a></div></div>
+          <div><div class="ci-label" data-i18n="contact_wa">WhatsApp</div><div class="ci-val"><a href="https://wa.me/420789657570" target="_blank" rel="noopener">+420 789 657 570</a></div></div>
         </div>
         <div class="ci-item">
           <div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
@@ -763,7 +739,7 @@ let calcCity = 'praha';
 
 function setLang(lang) {
   currentLang = lang;
-  const t = T[lang];
+  const t = T[lang] || T['cs'];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
     if (t[k] !== undefined) el.textContent = t[k];
@@ -777,7 +753,8 @@ function setLang(lang) {
     if (t[k] !== undefined) el.placeholder = t[k];
   });
   document.querySelectorAll('.lang-sw button').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.lang-sw button[onclick="setLang('${lang}')"]`).classList.add('active');
+  const activeBtn = document.querySelector(`.lang-sw button[onclick="setLang('${lang}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
   document.documentElement.lang = lang === 'uk' ? 'uk' : lang === 'ru' ? 'ru' : lang;
 }
 
@@ -792,7 +769,7 @@ function switchCity(city) {
 function setCalcCity(city) {
   calcCity = city;
   document.querySelectorAll('.calc-city-btn').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  if (window.event) window.event.currentTarget.classList.add('active');
   document.getElementById('calc-form-praha').style.display = city === 'praha' ? 'grid' : 'none';
   document.getElementById('calc-form-bratislava').style.display = city === 'bratislava' ? 'grid' : 'none';
   city === 'praha' ? calcPrice() : calcPriceBrno();
@@ -909,117 +886,6 @@ function animateCount(el) {
   requestAnimationFrame(step);
 }
 
-// ── INTRO: bee flies over, gold sprinkles fall from it and spell LUMINOUS (disabled for now — see matching CSS/HTML blocks)
-/*
-(function() {
-  const overlay = document.getElementById('intro-overlay');
-  const canvas = document.getElementById('intro-canvas');
-  const bee = document.getElementById('intro-bee-wrap');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    overlay.remove();
-    return;
-  }
-
-  const ctx = canvas.getContext('2d');
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const w = window.innerWidth, h = overlay.getBoundingClientRect().height;
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  // target points: where the letters of LUMINOUS live, lower in the band
-  const word = 'LUMINOUS';
-  const fontSize = Math.min(w * 0.085, h * 0.3, 84);
-  const textY = h * 0.72;
-  const mask = document.createElement('canvas');
-  mask.width = w;
-  mask.height = h;
-  const mctx = mask.getContext('2d');
-  mctx.fillStyle = '#fff';
-  mctx.font = `400 ${fontSize}px 'Palatino Linotype', Palatino, Georgia, serif`;
-  mctx.textAlign = 'center';
-  mctx.textBaseline = 'middle';
-  mctx.fillText(word, w / 2, textY);
-  const data = mctx.getImageData(0, 0, w, h).data;
-
-  const step = Math.max(2, Math.floor(fontSize / 28));
-  const points = [];
-  for (let y = 0; y < h; y += step) {
-    for (let x = 0; x < w; x += step) {
-      if (data[(y * w + x) * 4 + 3] > 120) {
-        points.push({ x, y, r: Math.random() * 1.1 + .6, triggered: false, landed: false });
-      }
-    }
-  }
-
-  // bee flight path: steady left-to-right, irregular vertical bobbing
-  const flightMs = 2400, fallMs = 460, holdMs = 650, fadeMs = 800;
-  const baseY = h * 0.28;
-  const amp1 = 16 + Math.random() * 10, freq1 = 1.5 + Math.random() * 1, phase1 = Math.random() * Math.PI * 2;
-  const amp2 = 7 + Math.random() * 6, freq2 = 3.3 + Math.random() * 1.6, phase2 = Math.random() * Math.PI * 2;
-  const minY = h * 0.12, maxY = h * 0.58;
-
-  function beePos(t) {
-    const tc = Math.min(t, flightMs);
-    const x = (tc / flightMs) * w;
-    const tt = tc / 1000;
-    let y = baseY + amp1 * Math.sin(tt * freq1 + phase1) + amp2 * Math.sin(tt * freq2 + phase2);
-    y = Math.max(minY, Math.min(maxY, y));
-    return { x, y };
-  }
-
-  points.forEach(p => {
-    p.triggerT = Math.max(0, (p.x / w) * flightMs + (Math.random() - .5) * 120);
-  });
-
-  let start = null;
-  const totalMs = flightMs + fallMs + holdMs;
-
-  function frame(ts) {
-    if (!start) start = ts;
-    const elapsed = ts - start;
-    ctx.clearRect(0, 0, w, h);
-
-    const cur = beePos(elapsed);
-    const prev = beePos(Math.max(0, elapsed - 16));
-    const angle = Math.atan2(cur.y - prev.y, cur.x - prev.x) * 180 / Math.PI;
-    bee.style.transform = `translate(${cur.x}px,${cur.y}px) rotate(${angle + 90}deg)`;
-    bee.style.opacity = '1';
-
-    points.forEach(p => {
-      if (!p.triggered && elapsed >= p.triggerT) {
-        p.triggered = true;
-        p.startX = cur.x;
-        p.startY = cur.y;
-      }
-      if (p.triggered && !p.landed) {
-        const fp = Math.min((elapsed - p.triggerT) / fallMs, 1);
-        const ease = fp * fp;
-        p.curX = p.startX + (p.x - p.startX) * fp;
-        p.curY = p.startY + (p.y - p.startY) * ease;
-        p.alpha = Math.min(fp * 2, 1);
-        if (fp >= 1) { p.landed = true; p.curX = p.x; p.curY = p.y; p.alpha = 1; }
-      }
-      if (p.triggered) {
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(166,132,45,${p.alpha})`;
-        ctx.arc(p.curX, p.curY, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    });
-
-    if (elapsed < totalMs) {
-      requestAnimationFrame(frame);
-    } else {
-      bee.style.opacity = '0';
-      overlay.classList.add('hide');
-      setTimeout(() => overlay.remove(), fadeMs + 50);
-    }
-  }
-  requestAnimationFrame(frame);
-})();
-*/
-
 // ── GRAIN CANVAS ──
 (function() {
   const canvas = document.getElementById('grain-canvas');
@@ -1062,3 +928,5 @@ function submitForm(e) {
 // ── YEAR ──
 document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
+</body>
+</html>

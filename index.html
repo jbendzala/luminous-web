@@ -7,10 +7,10 @@
 <meta name="description" content="Prémiový úklidový servis v Praze a Bratislavě. Profesionální tým, pevné ceny, garance spokojenosti.">
 <style>
 :root {
-  --deep:     #1c0a03;
-  --rich:     #1c0e07;
-  --warm:     #271408;
-  --card:     #2e190c;
+  --deep:     #000000;
+  --rich:     #060606;
+  --warm:     #0d0d0d;
+  --card:     #141414;
   --gold:     #a6842d;
   --gold-lt:  #e8d09a;
   --gold-dk:  #886614;
@@ -18,7 +18,7 @@
   --gold-grad: linear-gradient(115deg,#4a3208 0%,#8c6a1f 16%,#f0d488 38%,#c9a44a 52%,#7a5a12 66%,#e6c46e 84%,#503a0c 100%);
   --gold-grad-radial: radial-gradient(circle at 35% 30%,#f5dc9a 0%,#e6c46e 30%,#c9a44a 55%,#8c6a1f 80%,#503a0c 100%);
   --ivory:    #efe4cc;
-  --muted:    #8a6e58;
+  --muted:    #999999;
   --border:   rgba(166,132,45,.2);
   --serif: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --sans:  'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -167,14 +167,13 @@ section{padding:5.5rem 5%}
 .ba-sec{background:var(--deep);padding:5.5rem 5%}
 .ba-wrap{max-width:780px;margin:0 auto}
 .ba-container{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid var(--border);user-select:none}
-.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.ba-before{background:radial-gradient(ellipse at 60% 40%,#3a2010 0%,#1e0e07 55%,#130904 100%)}
-.ba-after{clip-path:inset(0 50% 0 0);transition:clip-path .04s linear;background:radial-gradient(ellipse at 40% 50%,#1a0e06 0%,#0d0603 60%,#050301 100%)}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-image:url('images/beeforeafter.png');background-size:200% 100%;background-repeat:no-repeat}
+.ba-before{background-position:left top}
+.ba-after{clip-path:inset(0 50% 0 0);transition:clip-path .04s linear;background-position:right top}
 .ba-label{position:absolute;font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid;pointer-events:none}
 .ba-label-before{bottom:1.2rem;left:1.2rem;border-color:var(--muted);color:var(--muted)}
 .ba-label-after{bottom:1.2rem;right:1.2rem;border-color:var(--gold);color:var(--gold)}
-.ba-before::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(120,70,30,.04) 9px),repeating-linear-gradient(90deg,transparent,transparent 12px,rgba(100,60,20,.03) 13px)}
-.ba-after::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(166,132,45,.07) 0%,transparent 55%)}
+.ba-after::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(166,132,45,.05) 0%,transparent 55%);pointer-events:none}
 .ba-divider{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);left:50%;transform:translateX(-50%);z-index:5;pointer-events:none}
 .ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:var(--gold-grad-radial);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(166,132,45,.2)}
 .ba-handle svg{width:14px;height:14px;color:var(--deep)}

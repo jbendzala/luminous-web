@@ -167,9 +167,9 @@ section{padding:5.5rem 5%}
 .ba-sec{background:var(--deep);padding:5.5rem 5%}
 .ba-wrap{max-width:780px;margin:0 auto}
 .ba-container{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid var(--border);user-select:none}
-.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-image:url('images/beeforeafter.png');background-size:200% 100%;background-repeat:no-repeat}
-.ba-before{background-position:left top}
-.ba-after{clip-path:inset(0 50% 0 0);transition:clip-path .04s linear;background-position:right top}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;background-repeat:no-repeat}
+.ba-before{background-image:url('images/before.png')}
+.ba-after{clip-path:inset(0 50% 0 0);transition:clip-path .04s linear;background-image:url('images/after.png')}
 .ba-label{position:absolute;font-family:var(--sans);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid;pointer-events:none}
 .ba-label-before{bottom:1.2rem;left:1.2rem;border-color:var(--muted);color:var(--muted)}
 .ba-label-after{bottom:1.2rem;right:1.2rem;border-color:var(--gold);color:var(--gold)}
@@ -570,7 +570,6 @@ footer{background:var(--deep);border-top:1px solid var(--border);padding:2.25rem
       </div>
       <input type="range" class="ba-range" id="ba-range" min="0" max="100" value="50">
     </div>
-    <p class="ba-note" data-i18n="ba_note">Přetáhněte posuvník · Nahraďte obrázky vlastními fotografiemi před a po úklidu.</p>
   </div>
 </section>
 <!-- WHY US (redesigned) -->

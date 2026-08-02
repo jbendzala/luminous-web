@@ -714,12 +714,15 @@ footer .gold-shine{background:none;-webkit-background-clip:initial;background-cl
       </div>
     </div>
     <div class="fade-up">
-      <form class="contact-form" onsubmit="submitForm(event)">
-        <div class="ff"><label data-i18n="form_name">Jméno</label><input type="text" required placeholder="Vaše jméno" data-i18n-placeholder="form_name_ph"></div>
-        <div class="ff"><label data-i18n="form_email">E-mail</label><input type="email" required placeholder="vas@email.cz" data-i18n-placeholder="form_email_ph"></div>
+      <form class="contact-form" action="https://formsubmit.co/info@luminous.cz" method="POST" onsubmit="submitForm(event)">
+        <input type="hidden" name="_subject" value="Nová poptávka z webu Luminous">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="ff"><label data-i18n="form_name">Jméno</label><input type="text" name="Jméno" required placeholder="Vaše jméno" data-i18n-placeholder="form_name_ph"></div>
+        <div class="ff"><label data-i18n="form_email">E-mail</label><input type="email" name="E-mail" required placeholder="vas@email.cz" data-i18n-placeholder="form_email_ph"></div>
         <div class="ff">
           <label data-i18n="form_service">Služba</label>
-          <select>
+          <select name="Služba">
             <option data-i18n="svc1_name">Premium Home Cleaning</option>
             <option data-i18n="svc2_name">Deep Cleaning</option>
             <option data-i18n="svc3_name">Airbnb Property Care</option>
@@ -727,7 +730,7 @@ footer .gold-shine{background:none;-webkit-background-clip:initial;background-cl
             <option data-i18n="svc5_name">After Renovation Cleaning</option>
           </select>
         </div>
-        <div class="ff"><label data-i18n="form_msg">Zpráva</label><textarea placeholder="Popište prostor a vaše požadavky..." data-i18n-placeholder="form_msg_ph"></textarea></div>
+        <div class="ff"><label data-i18n="form_msg">Zpráva</label><textarea name="Zpráva" placeholder="Popište prostor a vaše požadavky..." data-i18n-placeholder="form_msg_ph"></textarea></div>
         <button type="submit" class="btn-primary" style="justify-content:center" data-i18n="form_send">Odeslat poptávku</button>
       </form>
     </div>
@@ -919,15 +922,32 @@ function animateCount(el) {
 
 function submitForm(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('[type="submit"]');
+  const form = e.target;
+  const btn = form.querySelector('[type="submit"]');
   const orig = btn.textContent;
-  btn.textContent = '✓ Odesláno';
-  btn.style.background = '#4a7a4a';
-  btn.style.borderColor = '#4a7a4a';
-  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.borderColor = ''; e.target.reset(); }, 3000);
+  btn.disabled = true;
+
+  const ajaxUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+  fetch(ajaxUrl, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+    .then(res => {
+      if (!res.ok) throw new Error('send failed');
+      btn.textContent = '✓ Odesláno';
+      btn.style.background = '#4a7a4a';
+      btn.style.borderColor = '#4a7a4a';
+      form.reset();
+    })
+    .catch(() => {
+      btn.textContent = '✗ Zkuste to znovu';
+      btn.style.background = '#a44a4a';
+      btn.style.borderColor = '#a44a4a';
+    })
+    .finally(() => {
+      setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.borderColor = ''; btn.disabled = false; }, 3000);
+    });
 }
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+setLang(currentLang);
 </script>
 </body>
 </html>
